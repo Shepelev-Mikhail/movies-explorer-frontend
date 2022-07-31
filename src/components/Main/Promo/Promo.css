@@ -1,0 +1,22 @@
+.promo {
+  height: 524px;
+  min-width: 320px;
+  max-width: 1280px;
+  padding-left: 70px;
+  padding-right: 70px;
+  background-color: #5c5c5c;
+  background-image: url(../../../images/promo-logo.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: center;
+}
+
+.promo__title {
+  padding: 0;
+  margin: 0;
+}
