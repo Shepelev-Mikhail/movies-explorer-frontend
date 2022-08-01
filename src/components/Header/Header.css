@@ -1,14 +1,21 @@
 .header {
-  height: 74px;
-  min-width: 320px;
-  max-width: 1280px;
-  padding-left: 70px;
-  padding-right: 70px;
   background-color: #5c5c5c;
+}
+
+.header__container {
+  height: 74px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-content: flex-start;
   align-items: center;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 70px;
+  padding-right: 70px;
+
 }
