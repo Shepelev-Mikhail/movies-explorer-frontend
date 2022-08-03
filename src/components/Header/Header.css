@@ -1,8 +1,5 @@
 .header {
   background-color: #5c5c5c;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
   font-size: 14px;
   line-height: 18px;
 }
@@ -17,13 +14,6 @@
   align-items: center;
 }
 
-.container {
-  max-width: 1140px;
-  margin: 0 auto;
-  padding-left: 70px;
-  padding-right: 70px;
-}
-
 .header__unauthorized {
   /* display: none; */
 }
@@ -36,7 +26,6 @@
   cursor: pointer;
   text-align: center;
   color: #FFFFFF;
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -49,7 +38,6 @@
   background-color: #2BE080;
   cursor: pointer;
   text-align: center;
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;

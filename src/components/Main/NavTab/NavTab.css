@@ -12,17 +12,9 @@
   align-items: center;
 }
 
-.container {
-  max-width: 1140px;
-  margin: 0 auto;
-  padding-left: 70px;
-  padding-right: 70px;
-}
-
 .nav__link {
   margin-right: 40px;
   cursor: pointer;
-  font-style: normal;
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;

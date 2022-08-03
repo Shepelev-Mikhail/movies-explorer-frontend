@@ -20,18 +20,9 @@
   padding: 0;
   margin: 0;
   max-width: 730px;
-  font-style: normal;
-  font-weight: 400;
   font-size: 50px;
   line-height: 58px;
   text-align: center;
   letter-spacing: -0.04em;
   color: #FFFFFF;
-}
-
-.container {
-  max-width: 1140px;
-  margin: 0 auto;
-  padding-left: 70px;
-  padding-right: 70px;
 }
