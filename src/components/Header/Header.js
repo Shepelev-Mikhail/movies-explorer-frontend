@@ -5,13 +5,19 @@ function Header(props) {
   return (
     <header className="header">
       <div className="container header__container">
-        <img className="header__logo" src={logo} alt="" />
+        <img className="header__logo" src={logo} alt="логотип" />
         <div>
-          <button type="button">Регистрация</button>
-          <button type="button">Войти</button>
-          <button type="button">Фильмы</button>
-          <button type="button">Сохраненные фильмы</button>
-          <button type="button">Аккаунт</button>
+          <div className="header__unauthorized">
+            <button type="button" className="header__signup">Регистрация</button>
+            <button type="button" className="header__signin">Войти</button>
+          </div>
+          <div className="header__authorized">
+            <div className="header__movies">
+              <button type="button" className="header__movies">Фильмы</button>
+              <button type="button" className="header__save-movies">Сохраненные фильмы</button>
+            </div>
+            <button type="button" className="header__account">Аккаунт</button>
+          </div>
         </div>
       </div>
     </header>

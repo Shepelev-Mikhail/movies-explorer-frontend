@@ -7,15 +7,53 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-between;
+  justify-content: space-between; 
   align-content: flex-start;
   align-items: center;
 }
 
 .container {
-  max-width: 1280px;
+  max-width: 1140px;
   margin: 0 auto;
   padding-left: 70px;
   padding-right: 70px;
+}
 
+.header__unauthorized {
+  
+}
+
+.header__signup {
+  padding: 0;
+  margin-right: 30px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.header__signin {
+  width: 76px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background-color: #2BE080;
+  cursor: pointer;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.header__authorized {
+  display: none;
 }

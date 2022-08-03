@@ -1,10 +1,9 @@
 .nav {
-  min-width: 320px;
-  max-width: 1280px;
-  padding-left: 70px;
-  padding-right: 70px;
-  height: 66px;
   background-color: #F5F5F5;
+}
+
+.nav__container {
+  height: 66px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -13,6 +12,25 @@
   align-items: center;
 }
 
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
 .nav__link {
   margin-right: 40px;
+  cursor: pointer;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: #000;
+}
+
+.nav__link:last-of-type {
+  margin-right: 0;
 }

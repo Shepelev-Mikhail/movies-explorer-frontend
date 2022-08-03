@@ -2,9 +2,11 @@ import './Promo.css'
 
 function Promo() {
   return(
-    <div className="promo">
-      <h1 className="promo__title">Учебный проект студента <br /> факультета Веб-разработки.</h1>
-    </div>
+    <section className="promo">
+      <div className="container promo__container">
+        <h1 className="promo__title">Учебный проект студента факультета Веб-разработки.</h1>
+      </div>
+    </section>
   )
 }
 
