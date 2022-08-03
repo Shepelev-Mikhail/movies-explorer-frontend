@@ -1,0 +1,47 @@
+.progress-bar {
+  margin: 110px 0 96px;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
+.progress-bar__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start; 
+  align-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.progress-bar__back {
+  width: 20%;
+}
+
+.progress-bar__front {
+  width: 80%;
+}
+
+.progress-bar__line {
+  margin: 0 0 14px;
+  padding: 9px 10px 10px;  
+  color: #000000;
+  background-color: #F2F2F2;
+}
+
+.progress-bar__line_green {
+  background-color: #2BE080;
+}
+
+.progress-bar__type {
+  font-weight: 500;
+  color: #A0A0A0;
+}

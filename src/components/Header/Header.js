@@ -1,4 +1,5 @@
 import logo from '../../images/logo.svg'
+import account from '../../images/account.svg'
 import './Header.css'
 
 function Header(props) {
@@ -6,18 +7,21 @@ function Header(props) {
     <header className="header">
       <div className="container header__container">
         <img className="header__logo" src={logo} alt="логотип" />
-        <div>
-          <div className="header__unauthorized">
-            <button type="button" className="header__signup">Регистрация</button>
-            <button type="button" className="header__signin">Войти</button>
+
+        <div className="header__unauthorized">
+          <button type="button" className="header__signup">Регистрация</button>
+          <button type="button" className="header__signin">Войти</button>
+        </div>
+        <div className="header__authorized">
+          <div className="header__movies">
+            <button type="button" className="header__movie">Фильмы</button>
+            <button type="button" className="header__save-movie">Сохраненные фильмы</button>
           </div>
-          <div className="header__authorized">
-            <div className="header__movies">
-              <button type="button" className="header__movies">Фильмы</button>
-              <button type="button" className="header__save-movies">Сохраненные фильмы</button>
-            </div>
-            <button type="button" className="header__account">Аккаунт</button>
+          <div className="header__account">
+            <button type="button" className="header__account-link">Аккаунт</button>
+            <img className="header__account-icon" src={account} alt="иконка" />
           </div>
+
         </div>
       </div>
     </header>

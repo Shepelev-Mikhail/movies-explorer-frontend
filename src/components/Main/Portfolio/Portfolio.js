@@ -1,23 +1,31 @@
 import './Portfolio.css'
+import linkIcon from '../../../images/link-icon.svg'
 
 function Portfolio() {
   return (
     <div className="portfolio">
-      <h2>Портфолио</h2>
-      <div className="portfolio__link">
-        <h3>Статичный сайт</h3>
-        <a href="https://github.com/Shepelev-Mikhail">&#129125;</a>
-      </div>
-      <div className="portfolio__link">
-        <h3>Адаптивный сайт</h3>
-        <a href="https://github.com/Shepelev-Mikhail">&#129125;</a>
-      </div>
-      <div className="portfolio__link">
-        <h3>Одностраничное приложение</h3>
-        <a href="https://github.com/Shepelev-Mikhail">&#129125;</a>
+      <div className="portfolio__container container">
+        <h2 className="portfolio__title">Портфолио</h2>
+        <div className="portfolio__link">
+          <h3 className="portfolio__link-name">Статичный сайт</h3>
+          <a href="https://github.com/Shepelev-Mikhail">
+            <img src={linkIcon} className="portfolio__link-icon" alt="иконка"/>
+          </a>
+        </div>
+        <div className="portfolio__link">
+          <h3 className="portfolio__link-name">Адаптивный сайт</h3>
+          <a href="https://github.com/Shepelev-Mikhail">
+            <img src={linkIcon} className="portfolio__link-icon" alt="иконка"/>
+          </a>
+        </div>
+        <div className="portfolio__link">
+          <h3 className="portfolio__link-name">Одностраничное приложение</h3>
+          <a href="https://github.com/Shepelev-Mikhail">
+            <img src={linkIcon} className="portfolio__link-icon" alt="иконка"/>
+          </a>
+        </div>
       </div>
     </div>
-
   )
 }
 

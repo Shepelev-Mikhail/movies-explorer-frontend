@@ -15,16 +15,6 @@ function AboutProject() {
             <p className="about-project__text">У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
           </div>
         </div>
-        <div className="about-project__graph">
-          <div className="about-project__back">
-            <p className="about-project__text">1 неделя</p>
-            <p className="about-project__text">Back-end</p>
-          </div>
-          <div className="about-project__front">
-            <p className="about-project__text">4 недели</p>
-            <p className="about-project__text">Front-end</p>
-          </div>
-        </div>
       </div>
       
     </section>

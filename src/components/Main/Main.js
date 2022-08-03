@@ -4,6 +4,7 @@ import AboutProject from './AboutProject/AboutProject';
 import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
+import ProgressBar from './ProgressBar/ProgressBar';
 
 function Main() {
   return (
@@ -11,6 +12,7 @@ function Main() {
       <Promo />
       <NavTab />
       <AboutProject />
+      <ProgressBar />
       <Techs />
       <AboutMe />
       <Portfolio />
