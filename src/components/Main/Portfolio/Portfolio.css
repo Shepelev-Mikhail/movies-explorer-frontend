@@ -35,6 +35,8 @@
 .portfolio__link-name {
   padding: 0;
   margin: 0;
+  font-style: normal;
+  font-weight: 400;
   font-size: 30px;
   line-height: 50px;
   letter-spacing: -0.04em;

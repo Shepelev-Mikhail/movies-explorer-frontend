@@ -6,20 +6,23 @@
   height: 524px;
   background-image: url(../../../images/promo-logo.svg);
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: 50% 40%;
   background-size: 320px 320px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   align-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .promo__title {
   padding: 0;
   margin: 0;
+  margin-top: 184px;
   max-width: 730px;
+  font-style: normal;
+  font-weight: 400;
   font-size: 50px;
   line-height: 58px;
   text-align: center;

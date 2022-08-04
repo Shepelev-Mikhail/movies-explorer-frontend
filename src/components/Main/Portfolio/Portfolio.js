@@ -1,5 +1,5 @@
-import './Portfolio.css'
-import linkIcon from '../../../images/link-icon.svg'
+import './Portfolio.css';
+import linkIcon from '../../../images/link-icon.svg';
 
 function Portfolio() {
   return (

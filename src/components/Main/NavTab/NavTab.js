@@ -1,4 +1,4 @@
-import './NavTab.css'
+import './NavTab.css';
 
 function NavTab() {
   return(

@@ -1,7 +1,7 @@
-import './Footer.css'
-import praktikum from '../../images/praktikum.svg'
-import github from '../../images/github.svg'
-import facebook from '../../images/facebook.svg'
+import './Footer.css';
+import praktikum from '../../images/praktikum.svg';
+import github from '../../images/github.svg';
+import facebook from '../../images/facebook.svg';
 
 function Footer() {
   return (
