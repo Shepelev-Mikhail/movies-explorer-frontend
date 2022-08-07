@@ -17,6 +17,9 @@ function App() {
         <Route exact path="/movies">
           <Movies />
         </Route>
+        <Route exact path="/saved-movies">
+          <Movies />
+        </Route>
       </Switch>
 
       <Footer />

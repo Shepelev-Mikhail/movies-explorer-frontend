@@ -1,7 +1,10 @@
 .header {
-  background-color: #5c5c5c;
   font-size: 14px;
   line-height: 18px;
+}
+
+.header_dark {
+  background-color: #5c5c5c;
 }
 
 .header__container {

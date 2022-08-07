@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react";
 import './Navigation.css';
-import account from '../../../images/account.svg';
+import { useLocation } from "react-router-dom";
 
 function Navigation() {
+  let location = useLocation();
   const [loggedIn, setLoggedIn] = useState(false);
 
-  // useEffect(() => {
-  //   setLoggedIn(false);
-  // }, [])
+  useEffect(() => {
+    setLoggedIn(true);
+  }, [])
 
   return (
     <>
       {loggedIn ? (
-        <div className="navigation__authorized">
+        <div className={`navigation__authorized ${location.pathname === "/" ? "navigation__authorized_theme-dark" : ""}`}>
           <div className="navigation__movies">
             <button type="button" className="navigation__movie">Фильмы</button>
             <button type="button" className="navigation__save-movie">Сохраненные фильмы</button>
           </div>
           <div className="navigation__account">
             <button type="button" className="navigation__account-link">Аккаунт</button>
-            <img className="navigation__account-icon" src={account} alt="иконка" />
+            <div className="navigation__account-icon" />
           </div>
         </div>
       ) : (

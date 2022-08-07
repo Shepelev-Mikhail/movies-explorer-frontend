@@ -1,4 +1,20 @@
 .movies__list {
-    padding-top: 70px;
-    list-style: none;
+  padding-top: 80px;
+  list-style: none;
+}
+
+.movies__add-button {
+  display: block;
+  padding: 0;
+  margin: 59px auto 82px;
+  width: 320px;
+  height: 36px;
+  background-color: #F9F9F9;
+  border: none;
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #000000;
 }
