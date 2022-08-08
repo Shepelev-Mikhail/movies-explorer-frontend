@@ -1,15 +1,15 @@
-import { useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import './Header.css';
-import Navigation from './Navigation/Navigation';
+import Navigation from '../Navigation/Navigation';
 
-function Header(props) {
-  let location = useLocation();
-
+function Header() {
   return (
-    <header className={`header ${location.pathname === "/" ? "header_dark" : ""}`}>
+    <header className="header">
       <div className="container header__container">
-        <img className="header__logo" src={logo} alt="логотип" />
+        <NavLink to="/" className="header__logo">
+          <img className="header__logo-img" src={logo} alt="логотип" />
+        </NavLink>
 
         <Navigation />
       </div>
