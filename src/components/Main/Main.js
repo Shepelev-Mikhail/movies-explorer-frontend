@@ -5,7 +5,6 @@ import AboutProject from './AboutProject/AboutProject';
 import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
-import ProgressBar from './ProgressBar/ProgressBar';
 
 function Main() {
   const ref1 = useRef(null);
@@ -39,7 +38,7 @@ function Main() {
       <Promo />
       <NavTab data={dataNav} onClick={buttonHandler} />
       <AboutProject componentRef={ref1} />
-      <ProgressBar />
+
       <Techs componentRef={ref2} />
       <AboutMe componentRef={ref3} />
       <Portfolio />
