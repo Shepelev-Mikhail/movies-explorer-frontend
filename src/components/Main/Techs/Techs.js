@@ -1,8 +1,8 @@
 import './Techs.css';
 
-function Techs() {
+function Techs({componentRef}) {
   return (
-      <div className="techs">
+      <div ref={componentRef} className="techs">
         <div className="techs__container container">
           <h2 className="techs__title">Технологии</h2>
           <h3 className="techs__subtitle">7 технологий</h3>

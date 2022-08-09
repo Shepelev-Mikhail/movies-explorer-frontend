@@ -116,18 +116,6 @@
     transform: translateX(0);
 }
 
-.menu.light .menu__item {
-    color: #ffffff;
-}
-
-.menu.light .menu__item.active {
-    border-color: #ffffff;
-}
-
-.menu.light .menu__account-text {
-    color: #ffffff;
-}
-
 @media (min-width: 768px) {
     .overlay-menu.active {
         display: block;
@@ -155,11 +143,9 @@
         margin-bottom: 23px;
         padding-bottom: 3px;
     }
-
-
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 992px) {
     .overlay-menu.active {
         display: none;
     }
@@ -192,5 +178,17 @@
 
     .menu__item_main {
         display: none;
+    }
+
+    .menu.light .menu__item {
+        color: #ffffff;
+    }
+
+    .menu.light .menu__item.active {
+        border-color: #ffffff;
+    }
+
+    .menu.light .menu__account-text {
+        color: #ffffff;
     }
 }

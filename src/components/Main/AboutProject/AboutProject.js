@@ -1,8 +1,8 @@
 import './AboutProject.css';
 
-function AboutProject() {
+function AboutProject({ componentRef }) {
   return (
-    <section className="about-project">
+    <section ref={componentRef} className="about-project">
       <div className="container about-project__container">
         <h2 className="about-project__title">О проекте</h2>
         <div className="about-project__description">
@@ -16,7 +16,7 @@ function AboutProject() {
           </div>
         </div>
       </div>
-      
+
     </section>
 
   )
