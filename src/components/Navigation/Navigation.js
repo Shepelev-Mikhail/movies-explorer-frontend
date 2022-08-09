@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './Navigation.css';
 
 const menu = [
@@ -38,13 +38,12 @@ function Navigation() {
   }, [location])
 
   const menuJsx = menu?.map(el => {
-    const isActive = location.pathname === el.link ? 'active' : ''
-
     return (
-      <NavLink 
-        key={el.id} 
-        to={el.link} 
-        className={`navigation__item ${isActive}`}
+      <NavLink
+        key={el.id}
+        exact
+        to={el.link}
+        className={`navigation__item`}
       >
         {el.title}
       </NavLink>
@@ -67,18 +66,11 @@ function Navigation() {
               <NavLink to="/profile" className="navigation__account">Аккаунт</NavLink>
             </div>
           </div>
-          <button 
-              type="button" 
+          <button
+              type="button"
               className={`navigation__menu-burger ${location.pathname === '/' ? 'light' : ''}`}
-              onClick={handleOpenMobileMenu} 
+              onClick={handleOpenMobileMenu}
             />
-          {/* {openMenu ? (
-              <>
-                
-              </>
-            ) : (
-              
-            ) */}
         </>
       ) : (
         <div className="navigation__buttons">
