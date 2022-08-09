@@ -28,7 +28,7 @@ function Navigation() {
   const [isOpenMenu, updateOpenMenu] = useState(false);
 
   useEffect(() => {
-    setLoggedIn(false);
+    setLoggedIn(true);
   }, [])
 
   const handleOpenMobileMenu = () => updateOpenMenu(!isOpenMenu);

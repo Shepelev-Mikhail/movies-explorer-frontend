@@ -4,6 +4,9 @@ import github from '../../images/github.svg';
 import facebook from '../../images/facebook.svg';
 
 function Footer() {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+
   return (
     <div className="footer">
       <div className="footer__container container">
@@ -11,7 +14,7 @@ function Footer() {
           Учебный проект Яндекс.Практикум х BeatFilm.
         </a>
         <div className="footer__nav">
-          <p className="footer__year">&#169; 2022</p>
+          <p className="footer__year">&#169; {currentYear}</p>
           <div className="footer__links">
             <a href="https://github.com/Shepelev-Mikhail">
               <img src={praktikum} alt="ссылка" />

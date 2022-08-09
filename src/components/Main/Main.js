@@ -38,7 +38,6 @@ function Main() {
       <Promo />
       <NavTab data={dataNav} onClick={buttonHandler} />
       <AboutProject componentRef={ref1} />
-
       <Techs componentRef={ref2} />
       <Student componentRef={ref3} />
       <Portfolio />
