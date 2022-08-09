@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import './Navigation.css';
+import Menu from "../Menu/Menu";
 
 const menu = [
   {
@@ -24,13 +25,13 @@ function Navigation() {
   let location = useLocation();
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [openMenu, updateOpenMenu] = useState(false);
+  const [isOpenMenu, updateOpenMenu] = useState(false);
 
   useEffect(() => {
-    setLoggedIn(true);
+    setLoggedIn(false);
   }, [])
 
-  const handleOpenMobileMenu = () => updateOpenMenu(!openMenu);
+  const handleOpenMobileMenu = () => updateOpenMenu(!isOpenMenu);
   const handleCloseMobileMenu = () => updateOpenMenu(false);
 
   useEffect(() => {
@@ -54,23 +55,13 @@ function Navigation() {
     <div className="navigation">
       {loggedIn ? (
         <>
-          <div className="navigation__overlay" onClick={handleCloseMobileMenu} />
-          <div className={`navigation__menu ${openMenu ? 'active' : ''}`}>
-            <button type="button" className="navigation__menu-close" onClick={handleCloseMobileMenu} />
+          <Menu isOpenMenu={isOpenMenu} onCloseMenu={handleCloseMobileMenu} className={location.pathname === '/' ? 'light' : ''} />
 
-            <div className="navigation__menu-main">
-              { menuJsx }
-            </div>
-
-            <div className="navigation__menu-buttons">
-              <NavLink to="/profile" className="navigation__account">Аккаунт</NavLink>
-            </div>
-          </div>
           <button
-              type="button"
-              className={`navigation__menu-burger ${location.pathname === '/' ? 'light' : ''}`}
-              onClick={handleOpenMobileMenu}
-            />
+            type="button"
+            className={`navigation__burger ${location.pathname === '/' ? 'light' : ''}`}
+            onClick={handleOpenMobileMenu}
+          />
         </>
       ) : (
         <div className="navigation__buttons">
