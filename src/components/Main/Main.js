@@ -3,7 +3,7 @@ import Promo from './Promo/Promo';
 import NavTab from './NavTab/NavTab';
 import AboutProject from './AboutProject/AboutProject';
 import Techs from './Techs/Techs';
-import AboutMe from './AboutMe/AboutMe';
+import Student from './Student/Student';
 import Portfolio from './Portfolio/Portfolio';
 
 function Main() {
@@ -40,7 +40,7 @@ function Main() {
       <AboutProject componentRef={ref1} />
 
       <Techs componentRef={ref2} />
-      <AboutMe componentRef={ref3} />
+      <Student componentRef={ref3} />
       <Portfolio />
     </div>
   )
