@@ -1,6 +1,6 @@
 import './SearchForm.css';
-import icon from '../../../images/icon.svg';
-import search from '../../../images/search.svg';
+import icon from '../../images/icon.svg';
+import search from '../../images/search.svg';
 import Switch from '../Switch/Switch';
 
 function SearchForm() {
