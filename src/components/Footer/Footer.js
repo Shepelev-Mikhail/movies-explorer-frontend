@@ -1,31 +1,46 @@
 import './Footer.css';
-import praktikum from '../../images/praktikum.svg';
-import github from '../../images/github.svg';
-import facebook from '../../images/facebook.svg';
+
+const links = [
+  {
+    title: 'Яндекс.Практикум',
+    link: 'https://github.com/Shepelev-Mikhail',
+    alt: 'ссылка'
+  },
+  {
+    title: 'Github',
+    link: 'https://github.com/Shepelev-Mikhail',
+    alt: 'ссылка'
+  },
+  {
+    title: 'Facebook',
+    link: 'https://github.com/Shepelev-Mikhail',
+    alt: 'ссылка'
+  }
+]
 
 function Footer() {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
 
+  const linksJsx = links?.map((el, index) => (
+    <a key={`footer-link-${index}`} href={el?.link} className="footer__link" target="_blank">
+      {el?.title}
+    </a>
+  ))
+
   return (
     <div className="footer">
-      <div className="footer__container container">
-        <a href="https://github.com/Shepelev-Mikhail" className="footer__project">
+      <div className="container footer__container">
+        <p className="footer__project">
           Учебный проект Яндекс.Практикум х BeatFilm.
-        </a>
-        <div className="footer__nav">
-          <p className="footer__year">&#169; {currentYear}</p>
+        </p>
+        <div className="footer__bottom">
           <div className="footer__links">
-            <a href="https://github.com/Shepelev-Mikhail">
-              <img src={praktikum} alt="ссылка" />
-            </a>
-            <a href="https://github.com/Shepelev-Mikhail">
-              <img src={github} alt="ссылка" />
-            </a>
-            <a href="https://github.com/Shepelev-Mikhail">
-              <img src={facebook} alt="ссылка" />
-            </a>
+            { linksJsx }
           </div>
+          <p className="footer__copyright">
+            &#169;<span className="footer__copyright-year">{currentYear}</span>
+          </p>
         </div>
       </div>
     </div>
