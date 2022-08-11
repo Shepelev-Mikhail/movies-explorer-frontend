@@ -53,6 +53,7 @@
 .movie__btn-icon {
   display: inline-block;
   vertical-align: top;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {

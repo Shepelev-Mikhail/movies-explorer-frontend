@@ -1,4 +1,3 @@
-import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import movie from '../../images/movie.svg';
@@ -25,10 +24,18 @@ const listSavedMovies = [
 ]
 
 function SavedMovies() {
+  const handleDeleteMovie = (id) => {
+    // тут будет удаление фильма из сохранённых
+  }
   return (
     <>
       <SearchForm />
-      <MoviesCardList data={listSavedMovies} />
+      <MoviesCardList
+        type="saved-movies"
+        data={listSavedMovies}
+        showBtnDelete={true}
+        onDeleteMovie={handleDeleteMovie}
+      />
     </>
   )
 }

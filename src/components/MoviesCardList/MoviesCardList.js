@@ -1,31 +1,33 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ data, showBtnMore = false }) {
+function MoviesCardList({ data, showBtnMore = false, showBtnDelete  = false, showBtnLike = false, onDeleteMovie, changeLikeMovie }) {
   const listMoviesJsx = data?.map(el => (
     <MoviesCard
       key={el?.id}
       data={el}
+      showBtnDelete={showBtnDelete}
+      showBtnLike={showBtnLike}
+      onDeleteMovie={onDeleteMovie}
+      changeLikeMovie={changeLikeMovie}
     />
   ))
 
   return (
     <section className="movies">
-      <ul className="movies__list container">
-        { listMoviesJsx }
+      <div className="container movies__container">
+        <ul className="movies__list">
+          { listMoviesJsx }
+        </ul>
 
-        {/*<MoviesCard title='Киноальманах «100 лет дизайна»' time='1ч 42м'/>
-        <MoviesCard title='В погоне за Бенкси' time='1ч 42м'/>
-        <MoviesCard title='Баския: Взрыв реальности' time='1ч 42м'/>
-        <MoviesCard title='Бег это свобода' time='1ч 42м'/>
-        <MoviesCard title='Книготорговцы' time='1ч 42м'/>
-        <MoviesCard title='Когда я думаю о Германии ночью' time='1ч 42м'/>*/}
-      </ul>
-      {
-        showBtnMore && (
-          <button type="button" className="movies__add-button">Ещё</button>
-        )
-      }
+        <div className="movies__buttons">
+          {
+            showBtnMore && (
+              <button type="button" className="movies__add-button">Ещё</button>
+            )
+          }
+        </div>
+      </div>
     </section>
   )
 }
