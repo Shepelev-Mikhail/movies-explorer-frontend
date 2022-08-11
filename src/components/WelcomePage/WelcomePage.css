@@ -1,34 +1,39 @@
-
-.login {
+.welcome-page {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     align-content: center;
-    height: 100vh;
-    min-height: 700px;
+    position: relative;
+    width: 100%;
     max-width: 260px;
-    margin: 56px auto 0;
+    height: 100vh;
+    min-height: 600px;
+    margin: 0 auto;
+    padding-top: 56px;
+    padding-bottom: 125px;
 }
 
-.login__title {
+.welcome-page__title {
     padding: 0;
-    margin: 46px 0 80px;
+    margin: 47px 0 76px;
     font-style: normal;
     font-weight: 500;
     font-size: 24px;
     line-height: 29px;
 }
 
-.login__form {
+.welcome-page__form {
     width: 100%;
 }
 
-.login__field {
+.welcome-page__field {
     width: 100%;
 }
 
-.login__input-text {
+.welcome-page__input-text {
+    display: inline-block;
+    vertical-align: middle;
     padding: 0;
     margin: 0;
     font-style: normal;
@@ -38,10 +43,10 @@
     color: #A0A0A0;
 }
 
-.login__input {
+.welcome-page__input {
     width: 100%;
-    padding: 5px 0 10px;
-    margin: 0 0 24px;
+    padding: 0 0 10px;
+    margin: 0 0 22px;
     outline: none;
     box-shadow: none;
     border: none;
@@ -52,9 +57,13 @@
     line-height: 17px;
 }
 
-.login__submit {
+.welcome-page__input:focus {
+    border-color: #2BE080;
+}
+
+.welcome-page__submit {
     padding: 0;
-    margin: 286px 0 14px;
+    margin: 20px 0 14px;
     width: 100%;
     height: 45px;
     background-color: #2BE080;
@@ -67,7 +76,16 @@
     line-height: 15px;
 }
 
-.login__link {
+.welcome-page__buttons {
+    display: block;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+}
+
+.welcome-page__footer {
     width: 100%;
     border: none;
     box-shadow: none;
@@ -82,29 +100,50 @@
     color: #A0A0A0;
 }
 
-.login__link-color {
+.welcome-page__footer-link {
+    margin-left: 7px;
+    text-decoration: none;
     color: #2BE080;
 }
 
 @media (min-width: 768px) {
-    .login {
+    .welcome-page {
         justify-content: center;
         align-items: flex-start;
         max-width: 396px;
         margin: 0 auto;
+        padding-top: 56px;
+        padding-bottom: 55px;
     }
 
-    .login__title {
-        margin: 36px 0 40px;
+    .welcome-page__title {
+        margin: 36px 0 35px;
     }
 
-    .login__submit {
-        margin: 197px 0 17px;
+    .welcome-page__submit {
+        margin: 22px 0 17px;
         font-size: 14px;
         line-height: 17px;
     }
 
-    .login__link {
+    .welcome-page__input {
+        padding: 2px 0 10px;
+        margin-bottom: 21px;
+    }
+
+    .welcome-page__fields {
+        min-height: 282px;
+    }
+
+    .welcome-page__buttons {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        margin-top: 35px;
+    }
+
+    .welcome-page__footer {
         font-size: 14px;
         line-height: 17px;
     }

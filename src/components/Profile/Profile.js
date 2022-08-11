@@ -31,7 +31,7 @@ function Profile() {
     <div className="profile">
       <h2 className="profile__title">Привет, Виталий!</h2>
 
-      <form className="profile__form" onSubmit={handleSubmit}>
+      <form method="post" className="profile__form" onSubmit={handleSubmit}>
         <div className="profile__fields">
           <div className="profile__field">
             <label className="profile__field-name">Имя</label>
