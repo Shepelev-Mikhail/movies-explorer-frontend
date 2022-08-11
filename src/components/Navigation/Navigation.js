@@ -65,8 +65,8 @@ function Navigation() {
         </>
       ) : (
         <div className="navigation__buttons">
-          <NavLink to="/signup" className="navigation__signup">Регистрация</NavLink>
-          <NavLink to="/signin" className="navigation__signin">Войти</NavLink>
+          <NavLink to="/sign-up" className="navigation__signup">Регистрация</NavLink>
+          <NavLink to="/sign-in" className="navigation__signin">Войти</NavLink>
         </div>
       )}
     </div>

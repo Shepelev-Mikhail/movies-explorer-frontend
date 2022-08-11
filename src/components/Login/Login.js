@@ -1,15 +1,21 @@
+import React from "react";
+import {Link, NavLink} from "react-router-dom";
+import logo from '../../images/logo.svg';
 import './Login.css';
-import { Link } from 'react-router-dom';
 
 function Login() {
   return (
-    <div className="authorization container">
-      <h2 className="authorization__title">Рады видеть!</h2>
-      <form className="authorization__form" method="post" name="register__form" onSubmit={() => (console.log('клик'))}>
-        <div className="authorization__field">
+    <div className="login">
+      <NavLink to="/" className="logo">
+        <img className="logo-img" src={logo} alt="логотип"/>
+      </NavLink>
+      <h2 className="login__title">Рады видеть!</h2>
+      <form className="login__form" method="post" name="login__form">
+        <div className="login__field">
+          <label className="login__input-text">E-mail</label>
           <input
             id="email-input"
-            className="authorization__input authorization__input_type_email"
+            className="login__input login__input_type_email"
             type="email"
             name="email"
             minLength="2"
@@ -17,15 +23,17 @@ function Login() {
             placeholder="Email"
             autoComplete="off"
             required
-            onChange={() => (console.log('клик'))}
+            value="pochta@yandex.ru"
+            onChange={()=> {}}
           />
-          <span className="email-input-error authorization__error"></span>
+          <span className="email-input-error login__error" />
         </div>
 
-        <div className="authorization__field">
+        <div className="login__field">
+          <label className="login__input-text">Пароль</label>
           <input
             id="password-input"
-            className="authorization__input authorization__input_type_password"
+            className="login__input login__input_type_password"
             type="password"
             name="password"
             minLength="2"
@@ -33,13 +41,14 @@ function Login() {
             placeholder="Password"
             autoComplete="off"
             required
-            onChange={() => (console.log('клик'))}
+            onChange={()=> {}}
           />
-          <span className="password-input-error authorization__error"></span>
+          <span className="password-input-error login__error" />
         </div>
-        <button className="authorization__submit" type="submit">Войти</button>
+        <button className="login__submit" type="submit">Войти</button>
       </form>
-      <Link className="authorization__link" to="/sign-in">Ещё не зарегистрированы? Регистрация</Link>
+      <Link className="login__link" to="/sign-up">Ещё не зарегистрированы? <span
+        className="login__link-color">Регистрация</span></Link>
     </div>
   )
 }

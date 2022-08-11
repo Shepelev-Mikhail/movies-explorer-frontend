@@ -33,10 +33,10 @@ function App() {
         <Header />
         <Profile />
       </Route>
-      <Route exact path="/signin">
+      <Route exact path="/sign-in">
         <Login />
       </Route>
-      <Route exact path="/signup">
+      <Route exact path="/sign-up">
         <Register />
       </Route>
       <Route exact path="*">
