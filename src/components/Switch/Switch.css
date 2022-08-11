@@ -1,6 +1,5 @@
 .switch {
-  margin: 0 30px;
-  /* display: inline-block; */
+
   vertical-align: middle;
   display: flex;
   flex-direction: row;
@@ -51,10 +50,15 @@
 
 .switch__text {
   padding: 0;
-  margin: 0;
-  margin-left: 14px;
+  margin: 0 0 0 14px;
   font-style: normal;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 11px;
   line-height: 18px;
+}
+
+@media (min-width: 768px) {
+  .switch__text {
+    font-size: 13px;
+  }
 }

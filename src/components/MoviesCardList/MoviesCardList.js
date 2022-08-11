@@ -1,7 +1,7 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ data }) {
+function MoviesCardList({ data, showBtnMore = false }) {
   const listMoviesJsx = data?.map(el => (
     <MoviesCard
       key={el?.id}
@@ -21,7 +21,11 @@ function MoviesCardList({ data }) {
         <MoviesCard title='Книготорговцы' time='1ч 42м'/>
         <MoviesCard title='Когда я думаю о Германии ночью' time='1ч 42м'/>*/}
       </ul>
-      <button type="button" className="movies__add-button">Ещё</button>
+      {
+        showBtnMore && (
+          <button type="button" className="movies__add-button">Ещё</button>
+        )
+      }
     </section>
   )
 }

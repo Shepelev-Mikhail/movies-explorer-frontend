@@ -1,6 +1,22 @@
+.movies {
+  position: relative;
+  padding-top: 50px;
+}
+
+.movies:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  right: 10px;
+  height: 1px;
+  background-color: #E8E8E8;
+}
+
 .movies__list {
-  padding-top: 80px;
   list-style: none;
+  padding: 0 10px;
 }
 
 .movies__add-button {
@@ -17,4 +33,37 @@
   font-size: 12px;
   line-height: 15px;
   color: #000000;
+}
+
+@media (min-width: 768px) {
+  .movies {
+    padding-top: 71px;
+  }
+
+  .movies:after {
+    left: 30px;
+    right: 30px;
+  }
+
+  .movies__list {
+    padding: 0 30px;
+  }
+}
+
+@media (min-width: 992px) {
+  .movies {
+    padding-top: 81px;
+  }
+
+  .movies:after {
+    left: 70px;
+    right: 70px;
+  }
+
+  .movies__list {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: 70px;
+    padding-right: 70px;
+  }
 }

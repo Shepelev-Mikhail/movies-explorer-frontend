@@ -6,8 +6,16 @@ html {
   scroll-behavior: smooth;
 }
 
+body, html {
+  height: 100%;
+}
+
+.root {
+  height: 100%;
+}
+
 .page {
-  min-height: 100vh;
+  height: 100%;
   min-width: 320px;
   display: flex;
   flex-direction: column;
@@ -16,6 +24,13 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+.main {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  position: relative;
 }
 
 .container {
