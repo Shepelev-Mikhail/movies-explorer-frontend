@@ -39,6 +39,7 @@
   font-size: 12px;
   line-height: 15px;
   color: #000000;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
