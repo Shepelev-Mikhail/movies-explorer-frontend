@@ -3,7 +3,7 @@ import './Footer.css';
 const links = [
   {
     title: 'Яндекс.Практикум',
-    link: 'https://github.com/Shepelev-Mikhail',
+    link: 'https://practicum.yandex.ru/',
     alt: 'ссылка'
   },
   {
@@ -13,7 +13,7 @@ const links = [
   },
   {
     title: 'Facebook',
-    link: 'https://github.com/Shepelev-Mikhail',
+    link: 'https://www.facebook.com/',
     alt: 'ссылка'
   }
 ]
@@ -23,7 +23,7 @@ function Footer() {
   const currentYear = currentDate.getFullYear();
 
   const linksJsx = links?.map((el, index) => (
-    <a key={`footer-link-${index}`} href={el?.link} className="footer__link" target="_blank">
+    <a key={`footer-link-${index}`} href={el?.link} className="footer__link" target="_blank" rel="noreferrer">
       {el?.title}
     </a>
   ))

@@ -40,6 +40,16 @@ body, html {
   padding-right: 14px;
 }
 
+.logo {
+  display: inline-block;
+  vertical-align: middle;
+  transition: opacity .3s linear;
+}
+
+.logo:hover {
+  opacity: .6;
+}
+
 @media (min-width: 768px) {
   .container {
     padding-left: 70px;

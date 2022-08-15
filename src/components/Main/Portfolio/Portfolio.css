@@ -30,10 +30,15 @@
   justify-content: space-between;
   align-content: flex-start;
   align-items: baseline;
+  transition: opacity .3s linear;
 }
 
 .portfolio__link:last-of-type {
   border-bottom: none;
+}
+
+.portfolio__link:hover {
+ opacity: .6;
 }
 
 .portfolio__link-name {
@@ -44,6 +49,8 @@
   font-size: 18px;
   line-height: 28px;
   letter-spacing: -0.04em;
+  text-decoration: none;
+  color: #000000;
 }
 
 .portfolio__link-icon {

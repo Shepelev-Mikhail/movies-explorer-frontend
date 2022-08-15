@@ -14,7 +14,7 @@ function Switch({onChange}) {
   };
 
   return (
-    <div className={checked ? `switch switch--on`: "switch"}>
+    <div className={checked ? `switch switch_on`: "switch"}>
       <div className="switch__content">
         <div className="switch__bg" onClick={handlerSwitch} />
         <div className="switch__handle" onClick={handlerSwitch} />

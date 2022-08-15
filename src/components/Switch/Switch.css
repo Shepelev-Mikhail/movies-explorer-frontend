@@ -40,11 +40,11 @@
   transition: left 0.25s ease;
 }
 
-.switch--on .switch__bg {
+.switch_on .switch__bg {
   background-color: #2BE080;
 }
 
-.switch--on .switch__handle {
+.switch_on .switch__handle {
   left: calc(100% - 10px - 2px);
 }
 

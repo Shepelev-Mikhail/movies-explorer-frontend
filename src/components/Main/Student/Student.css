@@ -78,6 +78,11 @@
   font-size: 14px;
   line-height: 17px;
   color: #000000;
+  transition: opacity .3s linear;
+}
+
+.student__link:hover {
+  opacity: .6;
 }
 
 .student__photo {

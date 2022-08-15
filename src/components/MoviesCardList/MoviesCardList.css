@@ -40,6 +40,11 @@
   line-height: 15px;
   color: #000000;
   cursor: pointer;
+  transition: opacity .3s linear;
+}
+
+.movies__add-button:hover {
+  opacity: .6;
 }
 
 @media (min-width: 768px) {

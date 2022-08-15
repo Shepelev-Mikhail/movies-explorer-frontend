@@ -32,6 +32,11 @@
   text-decoration: none;
   color: #000000;
   cursor: pointer;
+  transition: opacity .3s linear;
+}
+
+.footer__link:hover {
+  opacity: .6;
 }
 
 .footer__copyright {

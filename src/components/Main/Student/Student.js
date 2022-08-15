@@ -25,8 +25,8 @@ function Student({componentRef}) {
             </div>
 
             <div className="student__links">
-              <a href="#" className="student__link">Facebook</a>
-              <a href="#" className="student__link">Github</a>
+              <a href="https://www.facebook.com/" className="student__link" target="_blank" rel="noreferrer">Facebook</a>
+              <a href="https://github.com/" className="student__link" target="_blank" rel="noreferrer">Github</a>
             </div>
           </div>
         </div>

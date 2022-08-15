@@ -27,6 +27,7 @@ function Navigation() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isOpenMenu, updateOpenMenu] = useState(false);
 
+  // Переключатель зарегистрированный и незарегистрированный пользователь
   useEffect(() => {
     setLoggedIn(true);
   }, [])
@@ -55,11 +56,11 @@ function Navigation() {
     <div className="navigation">
       {loggedIn ? (
         <>
-          <Menu isOpenMenu={isOpenMenu} onCloseMenu={handleCloseMobileMenu} className={location.pathname === '/' ? 'light' : ''} />
+          <Menu isOpenMenu={isOpenMenu} onCloseMenu={handleCloseMobileMenu} className={location.pathname === '/' ? 'menu_light' : ''} />
 
           <button
             type="button"
-            className={`navigation__burger ${location.pathname === '/' ? 'light' : ''}`}
+            className={`navigation__burger ${location.pathname === '/' ? 'navigation__burger_light' : ''}`}
             onClick={handleOpenMobileMenu}
           />
         </>
