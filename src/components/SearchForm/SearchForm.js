@@ -9,13 +9,13 @@ function SearchForm() {
     <section className="search-form">
       <div className="search-form__container">
         <div className="search-form__content">
-          <div className="search-form__field">
+          <form className="search-form__field">
             <img className="search-form__icon" src={icon} alt="поиск" />
-            <input className="search-form__input" placeholder="Фильм" />
+            <input className="search-form__input" placeholder="Фильм" required/>
             <button type="submit" className="search-form__button">
               <img className="search-form__button-image" src={search} alt="поиск" />
             </button>
-          </div>
+          </form>
           <Switch onChange={(data) => { console.log('111', data?.value)}} />
         </div>
       </div>

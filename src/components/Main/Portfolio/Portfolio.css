@@ -1,5 +1,6 @@
 .portfolio {
   padding-bottom: 50px;
+  background-color: #FFFFFF;
 }
 
 .portfolio__container {
@@ -20,9 +21,19 @@
   color: #A0A0A0;
 }
 
+.portfolio__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.portfolio__links-item {
+  border-bottom: 1px solid #E8E8E8;
+}
+
 .portfolio__link {
   padding: 20px 0 19px;
-  border-bottom: 1px solid #E8E8E8;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -31,9 +42,10 @@
   align-content: flex-start;
   align-items: baseline;
   transition: opacity .3s linear;
+  text-decoration: none;
 }
 
-.portfolio__link:last-of-type {
+.portfolio__links-item:last-of-type {
   border-bottom: none;
 }
 
@@ -49,7 +61,6 @@
   font-size: 18px;
   line-height: 28px;
   letter-spacing: -0.04em;
-  text-decoration: none;
   color: #000000;
 }
 
