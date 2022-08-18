@@ -15,22 +15,22 @@ function App() {
     <div className="page">
     <Switch>
       <Route exact path="/">
+        <Header />
         <main className="main">
-          <Header />
           <Main />
         </main>
         <Footer />
       </Route>
       <Route exact path="/movies">
+        <Header />
         <main className="main">
-          <Header />
           <Movies />
         </main>
         <Footer />
       </Route>
       <Route exact path="/saved-movies">
+        <Header />
         <main className="main">
-          <Header />
           <SavedMovies />
         </main>
         <Footer />

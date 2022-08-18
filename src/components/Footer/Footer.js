@@ -29,7 +29,7 @@ function Footer() {
   ))
 
   return (
-    <div className="footer">
+    <footer className="footer">
       <div className="container footer__container">
         <p className="footer__project">
           Учебный проект Яндекс.Практикум х BeatFilm.
@@ -43,7 +43,7 @@ function Footer() {
           </p>
         </div>
       </div>
-    </div>
+    </footer>
   )
 }
 

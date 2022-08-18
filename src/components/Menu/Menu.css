@@ -190,7 +190,7 @@
 
   .menu__item.active {
     font-weight: 500;
-    border: none;
+    border-color: transparent;
   }
 
   .menu__item_main {
