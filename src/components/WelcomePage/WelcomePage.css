@@ -1,0 +1,160 @@
+.welcome-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  height: 100vh;
+  min-height: 600px;
+  margin: 0 auto;
+  padding-top: 56px;
+  padding-bottom: 125px;
+}
+
+.welcome-page__title {
+  padding: 0;
+  margin: 47px 0 76px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.welcome-page__form {
+  width: 100%;
+}
+
+.welcome-page__field {
+  width: 100%;
+}
+
+.welcome-page__input-text {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0;
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #A0A0A0;
+}
+
+.welcome-page__input {
+  width: 100%;
+  padding: 0 0 10px;
+  margin: 0 0 22px;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid #E8E8E8;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.welcome-page__input:focus {
+  border-color: #2BE080;
+}
+
+.welcome-page__submit {
+  padding: 0;
+  margin: 20px 0 14px;
+  width: 100%;
+  height: 45px;
+  background-color: #2BE080;
+  border: none;
+  border-radius: 3px;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  transition: opacity .3s linear;
+}
+
+.welcome-page__submit:hover {
+  opacity: .6;
+}
+
+.welcome-page__buttons {
+  display: block;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+}
+
+.welcome-page__footer {
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #A0A0A0;
+}
+
+.welcome-page__footer-link {
+  margin-left: 7px;
+  text-decoration: none;
+  color: #2BE080;
+  transition: opacity .3s linear;
+}
+
+.welcome-page__footer-link:hover {
+  opacity: .6;
+}
+
+@media (min-width: 768px) {
+  .welcome-page {
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 396px;
+    margin: 0 auto;
+    padding-top: 56px;
+    padding-bottom: 55px;
+  }
+
+  .welcome-page__title {
+    margin: 36px 0 35px;
+  }
+
+  .welcome-page__submit {
+    margin: 22px 0 17px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .welcome-page__input {
+    padding: 2px 0 10px;
+    margin-bottom: 21px;
+  }
+
+  .welcome-page__fields {
+    min-height: 282px;
+  }
+
+  .welcome-page__buttons {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    margin-top: 35px;
+  }
+
+  .welcome-page__footer {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

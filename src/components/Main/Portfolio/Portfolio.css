@@ -1,0 +1,117 @@
+.portfolio {
+  padding-bottom: 50px;
+  background-color: #FFFFFF;
+}
+
+.portfolio__container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+
+.portfolio__title {
+  margin: 0 0 21px;
+  padding: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #A0A0A0;
+}
+
+.portfolio__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.portfolio__links-item {
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.portfolio__link {
+  padding: 20px 0 19px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  align-items: baseline;
+  transition: opacity .3s linear;
+  text-decoration: none;
+}
+
+.portfolio__links-item:last-of-type {
+  border-bottom: none;
+}
+
+.portfolio__link:hover {
+ opacity: .6;
+}
+
+.portfolio__link-name {
+  padding: 0;
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: -0.04em;
+  color: #000000;
+}
+
+.portfolio__link-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 11px;
+  height: 12px;
+  margin: -7px 4px 0 0;
+}
+
+@media (min-width: 768px) {
+  .portfolio {
+    padding-bottom: 70px;
+  }
+  .portfolio__container {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  .portfolio__title {
+    margin-bottom: 29px;
+    font-size: 18px;
+  }
+  .portfolio__link-name {
+    font-size: 28px;
+    line-height: 50px;
+  }
+  .portfolio__link-icon {
+    width: 17px;
+    height: 16px;
+    margin: -7px 5px 0 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .portfolio {
+    padding-bottom: 105px;
+  }
+  .portfolio__container {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+  .portfolio__title {
+    margin-bottom: 30px;
+  }
+  .portfolio__link-name {
+    font-size: 30px;
+  }
+  .portfolio__link-icon {
+    width: 18px;
+    height: 17px;
+    margin: -9px 6px 0 0;
+  }
+}
