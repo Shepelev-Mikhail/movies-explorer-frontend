@@ -1,5 +1,5 @@
 import './Student.css';
-import photo from '../../../images/photo.svg';
+import photo from '../../../images/photo.jpg';
 
 function Student({componentRef}) {
   return (
@@ -13,14 +13,13 @@ function Student({componentRef}) {
 
           <div className="student__info">
             <div className="student__description">
-              <h3 className="student__name">Виталий</h3>
-              <h4 className="student__profile">Фронтенд-разработчик, 30 лет</h4>
-              <p className="student__story">Я&nbsp;родился и&nbsp;живу в&nbsp;Саратове,
-                закончил факультет экономики СГУ. У&nbsp;меня есть жена и&nbsp;дочь. Я&nbsp;люблю
-                слушать музыку, а&nbsp;ещё увлекаюсь бегом. Недавно начал кодить. С&nbsp;2015 года
-                работал в&nbsp;компании &laquo;СКБ Контур&raquo;. После того, как прошёл курс
-                по&nbsp;<nobr>веб-разработке</nobr>, начал заниматься <nobr>фриланс-заказами</nobr>
-                и&nbsp;ушёл с&nbsp;постоянной работы.
+              <h3 className="student__name">Михаил</h3>
+              <h4 className="student__profile">Фронтенд-разработчик, 28 лет</h4>
+              <p className="student__story">
+                Я&nbsp;живу в&nbsp;городе Ставрополе, в&nbsp;университете учился на&nbsp;специальности 
+                &laquo;Земельный кадастр&raquo;. Мои увлечения&nbsp;&mdash; танцы и&nbsp;страйкбол. Учиться веб-разработке 
+                начал в&nbsp;2021&nbsp;г. После завершения курса по&nbsp;<nobr>веб-разработке</nobr> хочу поменять сферу деятельности 
+                и&nbsp;найти себя в&nbsp;новой профессии.
               </p>
             </div>
 
