@@ -1,7 +1,7 @@
 import './Profile.css';
 import {useState} from "react";
 
-function Profile() {
+function Profile(props) {
   const [isEdit, updateIsEdit] = useState(false);
   const [formParams, setFormParams] = useState({
     name: '',
@@ -84,7 +84,7 @@ function Profile() {
           >
             Редактировать
           </button>
-          <button type="button" className="profile__button profile__button_logout">Выйти из аккаунта</button>
+          <button type="button" className="profile__button profile__button_logout" onClick={props.signOut}>Выйти из аккаунта</button>
         </div>
       }
     </div>

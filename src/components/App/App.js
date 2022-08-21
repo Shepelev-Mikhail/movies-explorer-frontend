@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import * as MainApi from '../../utils/MainApi.js';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
@@ -21,19 +22,29 @@ function App() {
 
   let location = useLocation()
 
+// обнуление ошибок при переходе по страницам
   useEffect(() => {
     updateErrorSubmit('')
   }, [location]);
 
+//запрос данных пользователя при авторизации
+  useEffect(() => {
+    if (loggedIn) {
+      MainApi.getUserInfo()
+        .then((res) => {
+          updateCurrentUser(res)
+        })
+        .catch(console.log);
+    }
+  }, [loggedIn])
+
+// регистрация
   const handleRegister = ({ name, email, password }) => {
     return MainApi.register(name, email, password)
-      .then(() => {
-        console.log('регстрация успешно')
-        updateErrorSubmit('')
-        history.push('/movies')
+      .then((data) => {
+        handleLogin({ email, password })
       })
       .catch((err) => {
-        console.log('регстрация ошибка')
         if (err === 409) {
           updateErrorSubmit('Пользователь с таким email уже существует.')
         } else {
@@ -42,19 +53,11 @@ function App() {
       })
   };
 
-  // const updateApiHeaderWithToken = (token) => {
-  //   MainApi._headers = {
-  //     ...MainApi._headers,
-  //     'Authorization': `Bearer ${token}`
-  //   }
-  // }
-
+// вход
   const handleLogin = ({ email, password }) => {
     return MainApi.authorize(email, password)
       .then((data) => {
-        console.log('вход успешно', data.token)
         if (data.token) {
-          // updateApiHeaderWithToken(data.token);
           localStorage.setItem('token', data.token);
           setLoggedIn(true);
           updateErrorSubmit('')
@@ -71,44 +74,59 @@ function App() {
       })
   };
 
+  //выход
+  const signOut = () => {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    history.push('/');
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
       <Switch>
+
         <Route exact path="/">
-          <Header />
+          <Header loggedIn={loggedIn} />
           <main className="main">
             <Main />
           </main>
           <Footer />
         </Route>
-        <Route exact path="/movies">
-          <Header />
+
+        <ProtectedRoute exact path="/movies">
+          <Header loggedIn={loggedIn} />
           <main className="main">
             <Movies />
           </main>
           <Footer />
-        </Route>
-        <Route exact path="/saved-movies">
-          <Header />
+        </ProtectedRoute>
+
+        <ProtectedRoute exact path="/saved-movies">
+          <Header loggedIn={loggedIn} />
           <main className="main">
             <SavedMovies />
           </main>
           <Footer />
-        </Route>
-        <Route exact path="/profile">
-          <Header />
-          <Profile />
-        </Route>
+        </ProtectedRoute>
+
+        <ProtectedRoute exact path="/profile">
+          <Header loggedIn={loggedIn} />
+          <Profile signOut={signOut} />
+        </ProtectedRoute>
+
         <Route exact path="/signin">
           <Login handleLogin={handleLogin} errorSubmit={errorSubmit} />
         </Route>
+
         <Route exact path="/signup">
           <Register handleRegister={handleRegister} errorSubmit={errorSubmit} />
         </Route>
+
         <Route exact path="*">
           <NotFound />
         </Route>
+
       </Switch>
       </div>
     </CurrentUserContext.Provider>

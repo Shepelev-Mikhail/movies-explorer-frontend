@@ -21,16 +21,16 @@ const menu = [
   }
 ]
 
-function Navigation() {
+function Navigation(props) {
   let location = useLocation();
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  // const [loggedIn, setLoggedIn] = useState(false);
   const [isOpenMenu, updateOpenMenu] = useState(false);
 
   // Переключатель зарегистрированный и незарегистрированный пользователь
-  useEffect(() => {
-    setLoggedIn(true);
-  }, [])
+  // useEffect(() => {
+  //   setLoggedIn(true);
+  // }, [])
 
   const handleOpenMobileMenu = () => updateOpenMenu(!isOpenMenu);
   const handleCloseMobileMenu = () => updateOpenMenu(false);
@@ -54,7 +54,7 @@ function Navigation() {
 
   return (
     <div className="navigation">
-      {loggedIn ? (
+      {props.loggedIn ? (
         <>
           <Menu isOpenMenu={isOpenMenu} onCloseMenu={handleCloseMobileMenu} className={location.pathname === '/' ? 'menu_light' : ''} />
 

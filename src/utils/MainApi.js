@@ -32,10 +32,13 @@ export const authorize = (email, password) => {
 
 // инфо о пользователе
 export const getUserInfo = () => {
+  let token = localStorage.getItem('token');
+
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     },
     credentials: 'include',
   })
@@ -44,10 +47,13 @@ export const getUserInfo = () => {
 
 // редактировать инфо о пользователе
 export const editUserInfo = (name, email) => {
+  let token = localStorage.getItem('token');
+
   return fetch(`${BASE_URL}/users/me`, {
     method: 'PATCH',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     },
     credentials: 'include',
     body: JSON.stringify({name, email})
@@ -57,10 +63,13 @@ export const editUserInfo = (name, email) => {
 
 // Найти сохраненные фильмы
 export const getSaveMovies = () => {
+  let token = localStorage.getItem('token');
+
   return fetch(`${BASE_URL}/movies`, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     },
     credentials: 'include',
   })
@@ -69,10 +78,13 @@ export const getSaveMovies = () => {
 
 // Сохранить фильм
 export const savingMovie = (country, director, duration, year, description, image, trailerLink, thumbnail, nameRU, nameEN, movieId) => {
+  let token = localStorage.getItem('token');
+  
   return fetch(`${BASE_URL}/movies`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     },
     credentials: 'include',
     body: JSON.stringify({country, director, duration, year, description, image, trailerLink, thumbnail, nameRU, nameEN, movieId})
@@ -82,11 +94,14 @@ export const savingMovie = (country, director, duration, year, description, imag
 
 // Удалить фильм
 export const deleteMovie = (_id) => {
+  let token = localStorage.getItem('token');
+
   return fetch(`${BASE_URL}/movies/:_id`, {
     method: 'DELETE',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     },
   })
-  .then(this._checkResponse)
+  .then(checkResponse)
 };
