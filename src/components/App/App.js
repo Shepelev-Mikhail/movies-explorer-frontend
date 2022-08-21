@@ -94,7 +94,7 @@ function App() {
           <Footer />
         </Route>
 
-        <ProtectedRoute exact path="/movies">
+        <ProtectedRoute exact path="/movies" loggedIn={loggedIn}>
           <Header loggedIn={loggedIn} />
           <main className="main">
             <Movies />
@@ -102,7 +102,7 @@ function App() {
           <Footer />
         </ProtectedRoute>
 
-        <ProtectedRoute exact path="/saved-movies">
+        <ProtectedRoute exact path="/saved-movies" loggedIn={loggedIn}>
           <Header loggedIn={loggedIn} />
           <main className="main">
             <SavedMovies />
@@ -110,7 +110,7 @@ function App() {
           <Footer />
         </ProtectedRoute>
 
-        <ProtectedRoute exact path="/profile">
+        <ProtectedRoute exact path="/profile" loggedIn={loggedIn}>
           <Header loggedIn={loggedIn} />
           <Profile signOut={signOut} />
         </ProtectedRoute>
