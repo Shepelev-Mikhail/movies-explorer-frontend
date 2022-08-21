@@ -22,6 +22,10 @@ function App() {
 
   let location = useLocation()
 
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
 // обнуление ошибок при переходе по страницам
   useEffect(() => {
     updateErrorSubmit('')
@@ -79,6 +83,15 @@ function App() {
     localStorage.removeItem('token');
     setLoggedIn(false);
     history.push('/');
+  };
+
+  //проверка авторизации
+  const tokenCheck = () => {
+    let token = localStorage.getItem('token');
+    if (token) {
+      setLoggedIn(true);
+      history.push('/');
+    }
   };
 
   return (
