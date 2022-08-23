@@ -1,5 +1,6 @@
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Preloader from '../Preloader/Preloader';
 import movie from "../../images/movie.svg";
 
 const listMovies = [
@@ -42,7 +43,7 @@ const listMovies = [
   }
 ]
 
-function Movies() {
+function Movies(props) {
   const handlerChangeLikeMovie = (id, owner) => {
     // тут будет обновление лайка для фильма
   }
@@ -50,12 +51,14 @@ function Movies() {
   return (
     <>
       <SearchForm />
+      {/* <Preloader /> */}
       <MoviesCardList
         type="movies"
         data={listMovies}
         showBtnMore={true}
         showBtnLike={true}
         changeLikeMovie={handlerChangeLikeMovie}
+        getMovies={props.getMovies}
       />
     </>
   )

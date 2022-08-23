@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import * as MainApi from '../../utils/MainApi.js';
+import * as MoviesApi from '../../utils/MoviesApi.js';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -19,6 +20,7 @@ function App() {
   const [currentUser, updateCurrentUser] = useState(null);
   const [errorSubmit, updateErrorSubmit] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isEdit, updateIsEdit] = useState(false);
 
   let location = useLocation()
 
@@ -78,6 +80,23 @@ function App() {
       })
   };
 
+  // обновление профиля
+  const handleUpdateProfile = ({ name, email }) => {
+    return MainApi.editUserInfo(name, email)
+      .then((res) => {
+        updateCurrentUser(res)
+        updateErrorSubmit('')
+        updateIsEdit(false)
+      })
+      .catch((err) => {
+        if (err === 409) {
+          updateErrorSubmit('Пользователь с таким email уже существует.')
+        } else {
+          updateErrorSubmit('При обновлении профиля произошла ошибка.')
+        }
+      })
+  }
+
   //выход
   const signOut = () => {
     localStorage.removeItem('token');
@@ -93,6 +112,15 @@ function App() {
       history.push('/');
     }
   };
+
+  //загрузка фильмов с сервера
+  const getMovies = () => {
+    return MoviesApi.getMovies()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch(console.log);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -110,7 +138,7 @@ function App() {
         <ProtectedRoute exact path="/movies" loggedIn={loggedIn}>
           <Header loggedIn={loggedIn} />
           <main className="main">
-            <Movies />
+            <Movies getMovies={getMovies} />
           </main>
           <Footer />
         </ProtectedRoute>
@@ -125,7 +153,7 @@ function App() {
 
         <ProtectedRoute exact path="/profile" loggedIn={loggedIn}>
           <Header loggedIn={loggedIn} />
-          <Profile signOut={signOut} />
+          <Profile signOut={signOut} handleUpdateProfile={handleUpdateProfile} errorSubmit={errorSubmit} isEdit={isEdit} updateIsEdit={updateIsEdit}/>
         </ProtectedRoute>
 
         <Route exact path="/signin">

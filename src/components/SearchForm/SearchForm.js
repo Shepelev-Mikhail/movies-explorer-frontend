@@ -16,7 +16,7 @@ function SearchForm() {
               <img className="search-form__button-image" src={search} alt="поиск" />
             </button>
           </form>
-          <Switch onChange={(data) => { console.log('111', data?.value)}} />
+          <Switch onChange={(data) => { console.log(data?.value)}} />
         </div>
       </div>
     </section>
