@@ -1,41 +1,44 @@
+import { useEffect, useState } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import movie from '../../images/movie.svg';
+import Preloader from '../Preloader/Preloader';
+import * as MainApi from '../../utils/MainApi.js';
 
-const listSavedMovies = [
-  {
-    id: 1,
-    nameRU: '33 слова о дизайне',
-    duration: '1ч 42м',
-    img: movie
-  },
-  {
-    id: 2,
-    nameRU: 'Киноальманах «100 лет дизайна»',
-    duration: '1ч 42м',
-    img: movie
-  },
-  {
-    id: 3,
-    nameRU: 'В погоне за Бенкси',
-    duration: '1ч 42м',
-    img: movie
-  }
-]
 
 function SavedMovies() {
+  const [showPreloader, updateShowPreloader] = useState(false);
+  const [listSavedMovies, updateListSavedMovies] = useState([]);  
+
+  useEffect(() => {
+    updateShowPreloader(true)
+    MainApi.getSaveMovies()
+    .then((data) => {
+      updateListSavedMovies(data)
+      updateShowPreloader(false)
+    })
+  }, [])
+
   const handleDeleteMovie = (id) => {
-    // тут будет удаление фильма из сохранённых
+    updateListSavedMovies(listSavedMovies.filter(el => (el?.id !== id && el?._id !== id)))
   }
+
+  const handleUpdateMovies = (data) => {
+    updateListSavedMovies(data)
+  }
+
   return (
     <>
-      <SearchForm />
+      <SearchForm onUpdateListMovies={handleUpdateMovies} />
+
       <MoviesCardList
         type="saved-movies"
         data={listSavedMovies}
         showBtnDelete={true}
         onDeleteMovie={handleDeleteMovie}
       />
+
+      {showPreloader && <Preloader />}
     </>
   )
 }

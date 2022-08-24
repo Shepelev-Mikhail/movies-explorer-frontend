@@ -77,7 +77,7 @@ export const getSaveMovies = () => {
 };
 
 // Сохранить фильм
-export const savingMovie = (country, director, duration, year, description, image, trailerLink, thumbnail, nameRU, nameEN, movieId) => {
+export const savingMovie = ({country, director, duration, year, description, image, trailerLink, thumbnail, nameRU, nameEN, movieId}) => {
   let token = localStorage.getItem('token');
   
   return fetch(`${BASE_URL}/movies`, {
@@ -96,7 +96,7 @@ export const savingMovie = (country, director, duration, year, description, imag
 export const deleteMovie = (_id) => {
   let token = localStorage.getItem('token');
 
-  return fetch(`${BASE_URL}/movies/:_id`, {
+  return fetch(`${BASE_URL}/movies/${_id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

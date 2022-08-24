@@ -4,18 +4,23 @@ import icon from '../../images/icon.svg';
 import search from '../../images/search.svg';
 import Switch from '../Switch/Switch';
 import * as MoviesApi from '../../utils/MoviesApi.js';
+import Preloader from '../Preloader/Preloader';
 
 function SearchForm({initSearchParam, initActiveShortFilm, onUpdateListMovies}) {
   const [listMovies, updateListMovies] = useState(null);
 
   const [activeShortFilm, updateActiveShortFilm] = useState(initActiveShortFilm ? initActiveShortFilm : false);
   const [searchParam, updateSearchParam] = useState(initSearchParam ? initSearchParam : '');
+  const [showPreloader, updateShowPreloader] = useState(false);
   
   const getDataList = () => {
+    updateShowPreloader(true);
     MoviesApi.getMovies()
       .then((data) => {
         updateListMovies(data);
         getFilteredList(data);
+
+        updateShowPreloader(false);
       })
   }
   
@@ -95,6 +100,8 @@ function SearchForm({initSearchParam, initActiveShortFilm, onUpdateListMovies}) 
           <Switch isActive={activeShortFilm} onChange={handleChangeSwitch} />
         </div>
       </div>
+
+      {showPreloader && <Preloader />}
     </section>
   )
 }

@@ -14,7 +14,7 @@ function MoviesCardList({
  
   const listMoviesJsx = data?.map(el => (
     <MoviesCard
-      key={el?.id}
+      key={el?.id ? el?.id : el?._id}
       data={el}
       showBtnDelete={showBtnDelete}
       showBtnLike={showBtnLike}

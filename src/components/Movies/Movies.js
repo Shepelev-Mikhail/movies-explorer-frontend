@@ -1,9 +1,8 @@
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
-import movie from "../../images/movie.svg";
 import { useEffect, useState } from 'react';
-import * as MoviesApi from '../../utils/MoviesApi.js';
+import * as MainApi from '../../utils/MainApi.js';
 
 // const listMovies = [
 //   {
@@ -63,6 +62,17 @@ function Movies() {
   const [currPage, updateCurrPage] = useState(startPage);
   const [countPage, updateCountPage] = useState(null);
   const [showBtnMore, updateShowBtnMore] = useState(false);
+  const [showPreloader, updateShowPreloader] = useState(false);
+
+  useEffect(() => {
+    updateShowPreloader(true)
+    MainApi.getSaveMovies()
+    .then((data) => {
+      console.log('data', data)
+
+      updateShowPreloader(false)
+    })
+  }, [])
 
   useEffect(() => {
     if (listMovies?.length) {
@@ -99,7 +109,6 @@ function Movies() {
         initActiveShortFilm={initDataMovies?.shortFilm}
         onUpdateListMovies={handleUpdateMovies}
       />
-      {/* <Preloader /> */}
       {listMoviesPagination && 
         <MoviesCardList
           type="movies"
@@ -111,6 +120,8 @@ function Movies() {
           // getMovies={props.getMovies}
         />
       }
+
+      {showPreloader && <Preloader />}
     </>
   )
 }
