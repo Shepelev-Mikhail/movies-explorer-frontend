@@ -2,13 +2,14 @@ import './MoviesCard.css';
 import like from '../../images/like.svg';
 import like_countur from '../../images/like_countur.svg';
 import close from '../../images/close.svg';
-import movie from '../../images/movie.svg';
+
+export const BASE_URL = 'https://api.nomoreparties.co';
 
 function MoviesCard({ data, showBtnDelete  = false, showBtnLike = false, onDeleteMovie = () => {}, changeLikeMovie = () => {} }) {
 
   return (
     <li className="movie">
-      <img className="movie__img" src={movie} alt="картинка" />
+      <img className="movie__img" src={`${BASE_URL}${data?.image?.url}`} alt="картинка" />
 
       <div className="movie__info">
         <h2 className="movie__title">{data?.nameRU}</h2>

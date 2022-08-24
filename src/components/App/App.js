@@ -29,9 +29,9 @@ function App() {
   }, []);
 
 // обнуление ошибок при переходе по страницам
-  useEffect(() => {
-    updateErrorSubmit('')
-  }, [location]);
+  // useEffect(() => {
+  //   updateErrorSubmit('')
+  // }, [location]);
 
 //запрос данных пользователя при авторизации
   useEffect(() => {
@@ -109,18 +109,9 @@ function App() {
     let token = localStorage.getItem('token');
     if (token) {
       setLoggedIn(true);
-      history.push('/');
+      // history.push('/');
     }
   };
-
-  //загрузка фильмов с сервера
-  const getMovies = () => {
-    return MoviesApi.getMovies()
-      .then((res) => {
-        console.log(res)
-      })
-      .catch(console.log);
-  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -138,7 +129,7 @@ function App() {
         <ProtectedRoute exact path="/movies" loggedIn={loggedIn}>
           <Header loggedIn={loggedIn} />
           <main className="main">
-            <Movies getMovies={getMovies} />
+            <Movies />
           </main>
           <Footer />
         </ProtectedRoute>

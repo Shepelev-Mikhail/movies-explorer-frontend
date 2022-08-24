@@ -5,12 +5,6 @@ const checkResponse = (res) => {
 };
 
 export const getMovies = () => {
-    return fetch({BASE_URL}, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    })
+    return fetch(BASE_URL)
     .then(checkResponse)
   };

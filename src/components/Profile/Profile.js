@@ -1,18 +1,26 @@
 import './Profile.css';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import {useForm} from 'react-hook-form';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useEffect } from 'react';
 
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
+  const [isActiveSubmit, updateIsActiveSubmit] = useState(false);
 
   const onSubmit = (data) => {
-    const { name, email } = data
+    const { name, email } = data;
+
+    
     props.handleUpdateProfile({name, email});
+    currentUser.name = name;
+    currentUser.email = email;
+    updateIsActiveSubmit(false);
   }
 
   const {
     register,
+    watch,
     formState: {
       errors,
       isValid
@@ -25,6 +33,14 @@ function Profile(props) {
       email: currentUser.email
     }
   });
+
+  useEffect(() => {
+    watch((value) => {
+      // console.log('value', value?.name, value?.email)
+      // console.log('currentUser', currentUser.name, currentUser.email)
+      updateIsActiveSubmit(value?.name !== currentUser.name || value?.email !== currentUser.email)
+    });
+  }, [watch])
 
   return (
     <div className="profile">
@@ -54,7 +70,7 @@ function Profile(props) {
                   value: /^[a-zа-яё\s-]+$/,
                   message: "Используйте латиницу, кириллицу, пробел или дефис"
                 },
-                validate: value => value !== currentUser.name
+                //validate: value => value !== currentUser.name
               })}
             />
             <div className="profile__field-error">
@@ -87,7 +103,7 @@ function Profile(props) {
                   value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                   message: "Введен некорректный Email"
                 },
-                validate: value => value !== currentUser.email
+                // validate: value => value !== currentUser.email
               })}
             />
             <div className="profile__field-error">
@@ -105,7 +121,7 @@ function Profile(props) {
             <button
               type="submit"
               className="profile__submit"
-              disabled={!isValid}
+              disabled={!isValid || !isActiveSubmit}
             >
               Сохранить
             </button>
