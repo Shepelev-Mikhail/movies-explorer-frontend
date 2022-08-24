@@ -46,46 +46,71 @@ import * as MoviesApi from '../../utils/MoviesApi.js';
 // ]
 
 function Movies() {
-  const [initListMovies, updateInitListMovies] = useState(null);
-  const [fullListMovies, updateFullListMovies] = useState(null);
+  const pagination = 7;
+  const startPage = 1;
 
+  const storageSettingMovies = localStorage.getItem('settingMovies');
+  let initDataMovies = null;
 
-  // useEffect(() => {
-  //   MoviesApi.getMovies()
-  //     .then((data) => {
-  //       updateInitListMovies(data);
-  //     })
-  // }, []);
+  if (storageSettingMovies) {
+    initDataMovies = JSON.parse(storageSettingMovies)
+  }
+
+  const initList = initDataMovies?.list?.length ? initDataMovies.list.slice(0, pagination) : null;
+ 
+  const [listMovies, updateListMovies] = useState(initDataMovies?.list);
+  const [listMoviesPagination, updateListMoviesPagination] = useState(initList);
+  const [currPage, updateCurrPage] = useState(startPage);
+  const [countPage, updateCountPage] = useState(null);
+  const [showBtnMore, updateShowBtnMore] = useState(false);
 
   useEffect(() => {
-    updateFullListMovies(initListMovies)
-    console.log(initListMovies)
-  }, [initListMovies]);
+    if (listMovies?.length) {
+      updateCurrPage(startPage);
+      updateListMoviesPagination(listMovies.slice(0, pagination));
+
+      const count = Math.ceil(listMovies?.length / pagination);
+      updateCountPage(count);
+      updateShowBtnMore(currPage !== count);
+    } else {
+      updateListMoviesPagination([]);
+      updateShowBtnMore(false);
+    }
+  }, [listMovies]);
+
+  const onShowMore = () => {
+    updateListMoviesPagination(listMovies.slice(0, pagination * (currPage + 1)));
+    updateCurrPage(currPage + 1);
+    updateShowBtnMore(currPage + 1 !== countPage);
+  }
 
   const handlerChangeLikeMovie = (id, owner) => {
     // тут будет обновление лайка для фильма
   }
 
-  const getMovies = () => {
-    MoviesApi.getMovies()
-      .then((data) => {
-        updateInitListMovies(data);
-      })
-      .catch(console.log);
+  const handleUpdateMovies = (data) => {
+    updateListMovies(data)
   }
 
   return (
     <>
-      <SearchForm getMovies={getMovies}/>
-      {/* <Preloader /> */}
-      <MoviesCardList
-        type="movies"
-        data={fullListMovies}
-        showBtnMore={true}
-        showBtnLike={true}
-        changeLikeMovie={handlerChangeLikeMovie}
-        // getMovies={props.getMovies}
+      <SearchForm 
+        initSearchParam={initDataMovies?.searchParam}
+        initActiveShortFilm={initDataMovies?.shortFilm}
+        onUpdateListMovies={handleUpdateMovies}
       />
+      {/* <Preloader /> */}
+      {listMoviesPagination && 
+        <MoviesCardList
+          type="movies"
+          data={listMoviesPagination}
+          showBtnMore={showBtnMore}
+          showBtnLike={true}
+          changeLikeMovie={handlerChangeLikeMovie}
+          onShowMore={onShowMore}
+          // getMovies={props.getMovies}
+        />
+      }
     </>
   )
 }

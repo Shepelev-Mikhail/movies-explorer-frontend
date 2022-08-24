@@ -2,18 +2,27 @@ import './MoviesCard.css';
 import like from '../../images/like.svg';
 import like_countur from '../../images/like_countur.svg';
 import close from '../../images/close.svg';
+import { useState } from 'react';
 
-export const BASE_URL = 'https://api.nomoreparties.co';
+const BASE_URL = 'https://api.nomoreparties.co';
 
 function MoviesCard({ data, showBtnDelete  = false, showBtnLike = false, onDeleteMovie = () => {}, changeLikeMovie = () => {} }) {
+  const checkDurationMovie = () => {
+    const hour = Math.floor(data?.duration / 60);
+    const minutes = data?.duration % 60;
+
+    return `${hour > 0 ? hour + 'ч ' : ''}${minutes > 0 ? minutes + 'м' : ''}`
+  }
 
   return (
     <li className="movie">
       <img className="movie__img" src={`${BASE_URL}${data?.image?.url}`} alt="картинка" />
 
       <div className="movie__info">
-        <h2 className="movie__title">{data?.nameRU}</h2>
-        <p className="movie__time">{data?.duration}</p>
+        <a href={data?.trailerLink} className="movie__link" target="_blank" rel="noreferrer">
+          <h2 className="movie__title">{data?.nameRU}</h2>
+        </a>
+        <p className="movie__time">{ checkDurationMovie() }</p>
 
         <div className="movie__btn">
           {

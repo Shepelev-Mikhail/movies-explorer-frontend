@@ -29,9 +29,9 @@ function App() {
   }, []);
 
 // обнуление ошибок при переходе по страницам
-  // useEffect(() => {
-  //   updateErrorSubmit('')
-  // }, [location]);
+  useEffect(() => {
+    updateErrorSubmit('')
+  }, [location]);
 
 //запрос данных пользователя при авторизации
   useEffect(() => {
