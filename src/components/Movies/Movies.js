@@ -3,9 +3,10 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Movies() {
-  const pagination = 7;
+  let pagination = window.innerWidth >= 768 ? 7 : 5;
   const startPage = 1;
 
+  const [isDesktop, updateIsDesktop] = useState(window.innerWidth >= 768);
   const [listMovies, updateListMovies] = useState(null);
   const [listMoviesPagination, updateListMoviesPagination] = useState(null);
 
@@ -13,6 +14,14 @@ function Movies() {
   const [countPage, updateCountPage] = useState(null);
   const [showBtnMore, updateShowBtnMore] = useState(false);
 
+  useEffect(() => {
+    pagination = isDesktop ? 7 : 5;
+
+    if (listMovies?.length) {
+      updateCurrPage(startPage);
+      updateListMoviesPagination(listMovies.slice(0, pagination));
+    }
+  }, [isDesktop])
 
   useEffect(() => {
     if (listMovies?.length) {
@@ -37,6 +46,10 @@ function Movies() {
   const handleUpdateMovies = (data) => {
     updateListMovies(data)
   }
+
+  window.addEventListener('resize',  () => {
+    updateIsDesktop( window.innerWidth >= 768);
+  });
 
   return (
     <>
