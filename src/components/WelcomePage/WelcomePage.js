@@ -41,7 +41,7 @@ function WelcomePage({ title, btnSubmitName, footerText, footerLinkText, footerL
           {showName && (
             <div className="welcome-page__field">
               <label className="welcome-page__input-text">Имя</label>
-              <input 
+              <input
                 className="welcome-page__input welcome-page__input_type_name"
                 type="text"
                 placeholder="Имя"
@@ -57,13 +57,13 @@ function WelcomePage({ title, btnSubmitName, footerText, footerLinkText, footerL
                     message: "Максимум 40 символов"
                   },
                   pattern: {
-                    value: /^[a-zа-яё\s-]+$/,
+                    value: /^[а-яА-ЯёЁa-zA-Z\s-]+$/,
                     message: "Используйте латиницу, кириллицу, пробел или дефис"
                   }
                 })}
               />
               <div className="welcome-page__error">
-                {errors?.name && 
+                {errors?.name &&
                 <span className="name-input-error welcome-page__error-text">
                   {errors?.name?.message || "Error"}
                 </span>}
@@ -73,7 +73,7 @@ function WelcomePage({ title, btnSubmitName, footerText, footerLinkText, footerL
 
           <div className="welcome-page__field">
             <label className="welcome-page__input-text">E-mail</label>
-            <input 
+            <input
               className="welcome-page__input welcome-page__input_type_email"
               type="email"
               placeholder="Email"
@@ -95,7 +95,7 @@ function WelcomePage({ title, btnSubmitName, footerText, footerLinkText, footerL
               })}
             />
             <div className="welcome-page__error">
-              {errors?.email && 
+              {errors?.email &&
               <span className="email-input-error welcome-page__error-text">
                 {errors?.email?.message || "Error"}
               </span>}
@@ -104,7 +104,7 @@ function WelcomePage({ title, btnSubmitName, footerText, footerLinkText, footerL
 
           <div className="welcome-page__field">
             <label className="welcome-page__input-text">Пароль</label>
-            <input 
+            <input
               className="welcome-page__input welcome-page__input_type_password"
               type="password"
               placeholder="Password"
@@ -122,7 +122,7 @@ function WelcomePage({ title, btnSubmitName, footerText, footerLinkText, footerL
               })}
             />
             <div className="welcome-page__error">
-              {errors?.password && 
+              {errors?.password &&
               <span className="password-input-error welcome-page__error-text">
                 {errors?.password?.message || "Error"}
               </span>}

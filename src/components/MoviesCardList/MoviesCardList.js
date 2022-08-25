@@ -1,17 +1,15 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { useEffect, useState } from 'react';
 
-function MoviesCardList({ 
-  data, 
-  showBtnMore = false, 
-  showBtnDelete  = false, 
-  showBtnLike = false, 
-  onDeleteMovie, 
-  changeLikeMovie,
+function MoviesCardList({
+  data,
+  showBtnMore = false,
+  showBtnDelete  = false,
+  showBtnLike = false,
+  onDeleteMovie,
   onShowMore
  }) {
- 
+
   const listMoviesJsx = data?.map(el => (
     <MoviesCard
       key={el?.id ? el?.id : el?._id}
@@ -19,7 +17,6 @@ function MoviesCardList({
       showBtnDelete={showBtnDelete}
       showBtnLike={showBtnLike}
       onDeleteMovie={onDeleteMovie}
-      changeLikeMovie={changeLikeMovie}
     />
   ))
 

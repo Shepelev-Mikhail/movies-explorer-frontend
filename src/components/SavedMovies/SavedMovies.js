@@ -8,7 +8,7 @@ import * as MainApi from '../../utils/MainApi.js';
 
 function SavedMovies() {
   const [showPreloader, updateShowPreloader] = useState(false);
-  const [listSavedMovies, updateListSavedMovies] = useState([]);  
+  const [listSavedMovies, updateListSavedMovies] = useState([]);
 
   useEffect(() => {
     updateShowPreloader(true)
@@ -19,8 +19,8 @@ function SavedMovies() {
     })
   }, [])
 
-  const handleDeleteMovie = (id) => {
-    updateListSavedMovies(listSavedMovies.filter(el => (el?.id !== id && el?._id !== id)))
+  const handleDeleteMovie = (_id) => {
+    updateListSavedMovies(listSavedMovies.filter(el => (el?._id !== _id)))
   }
 
   const handleUpdateMovies = (data) => {
@@ -29,7 +29,10 @@ function SavedMovies() {
 
   return (
     <>
-      <SearchForm onUpdateListMovies={handleUpdateMovies} />
+      <SearchForm
+        initList={listSavedMovies}
+        onUpdateListMovies={handleUpdateMovies}
+      />
 
       <MoviesCardList
         type="saved-movies"

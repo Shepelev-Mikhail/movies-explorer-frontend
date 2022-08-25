@@ -2,12 +2,14 @@ import './MoviesCard.css';
 import like from '../../images/like.svg';
 import like_countur from '../../images/like_countur.svg';
 import close from '../../images/close.svg';
-import { useState } from 'react';
 import * as MainApi from '../../utils/MainApi.js';
+import {useState} from "react";
 
 const BASE_URL = 'https://api.nomoreparties.co';
 
-function MoviesCard({ data, showBtnDelete  = false, showBtnLike = false, onDeleteMovie = () => {}, changeLikeMovie = () => {} }) {
+function MoviesCard({ data, showBtnDelete  = false, showBtnLike = false, onDeleteMovie = () => {} }) {
+  const [isOwner, updateIsOwner] = useState(data?.isOwner);
+
   const checkDurationMovie = () => {
     const hour = Math.floor(data?.duration / 60);
     const minutes = data?.duration % 60;
@@ -16,32 +18,35 @@ function MoviesCard({ data, showBtnDelete  = false, showBtnLike = false, onDelet
   }
 
   const handleClickLike = () => {
-    if (!data?.owner) {
+    if (!isOwner) {
       MainApi.savingMovie({
-        country: data.country, 
-        director: data.director, 
-        duration: data.duration,  
-        year: data.year,  
-        description: data.description, 
-        image: `${BASE_URL}${data?.image?.url}`, 
-        trailerLink: data.trailerLink ? data.trailerLink : '',  
-        thumbnail: `${BASE_URL}${data.image?.formats?.thumbnail?.url}`, 
-        nameRU: data.nameRU, 
-        nameEN: data.nameEN,  
-        movieId: data?.id, 
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        year: data.year,
+        description: data.description,
+        image: `${BASE_URL}${data?.image?.url}`,
+        trailerLink: data.trailerLink ? data.trailerLink : '',
+        thumbnail: `${BASE_URL}${data.image?.formats?.thumbnail?.url}`,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
+        movieId: data?.id,
       })
       .then((data) => {
-          console.log('savingMovie', data)
-        // updateShowPreloader(false)
-        //() => changeLikeMovie(data?.id, !data?.owner)
+        updateIsOwner(data?._id);
       })
+    } else {
+      MainApi.deleteMovie(isOwner)
+        .then(() => {
+          updateIsOwner(null);
+        })
     }
   }
 
   const handleDeleteMovie = () => {
-    MainApi.deleteMovie(data?.id ? data.id : data._id)
+    MainApi.deleteMovie(data._id)
     .then((data) => {
-      onDeleteMovie(data?.id ? data.id : data._id)
+      onDeleteMovie(data._id)
     })
   }
 
@@ -69,7 +74,7 @@ function MoviesCard({ data, showBtnDelete  = false, showBtnLike = false, onDelet
             showBtnLike && (
               <img
                 className="movie__btn-icon"
-                src={data?.owner ? like : like_countur}
+                src={isOwner ? like : like_countur}
                 alt="лайк"
                 onClick={handleClickLike}
               />
