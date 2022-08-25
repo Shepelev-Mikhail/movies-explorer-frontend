@@ -1,7 +1,7 @@
 import React from "react";
 import WelcomePage from "../WelcomePage/WelcomePage";
 
-function Register() {
+function Register(props) {
   return (
     <WelcomePage
       showName={true}
@@ -9,7 +9,9 @@ function Register() {
       btnSubmitName="Зарегистрироваться"
       footerText="Уже зарегистрированы?"
       footerLinkText="Войти"
-      footerLinkHref="/sign-in"
+      footerLinkHref="/signin"
+      handler={props.handleRegister}
+      errorSubmit={props.errorSubmit}
     />
   )
 }
