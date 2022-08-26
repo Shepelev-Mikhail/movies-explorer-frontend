@@ -8,22 +8,24 @@ import * as MainApi from '../../utils/MainApi.js';
 function SavedMovies() {
   const [showPreloader, updateShowPreloader] = useState(false);
   const [listSavedMovies, updateListSavedMovies] = useState([]);
+  const [filteredListSavedMovies, updateFilteredListSavedMovies] = useState([]);
 
   useEffect(() => {
     updateShowPreloader(true)
     MainApi.getSaveMovies()
     .then((data) => {
-      updateListSavedMovies(data)
+      updateListSavedMovies(data);
+      updateFilteredListSavedMovies(data);
       updateShowPreloader(false)
     })
   }, [])
 
   const handleDeleteMovie = (_id) => {
-    updateListSavedMovies(listSavedMovies.filter(el => (el?._id !== _id)))
+    updateFilteredListSavedMovies(listSavedMovies.filter(el => (el?._id !== _id)))
   }
 
   const handleUpdateMovies = (data) => {
-    updateListSavedMovies(data)
+    updateFilteredListSavedMovies(data)
   }
 
   return (
@@ -35,7 +37,7 @@ function SavedMovies() {
 
       <MoviesCardList
         type="saved-movies"
-        data={listSavedMovies}
+        data={filteredListSavedMovies}
         showBtnDelete={true}
         onDeleteMovie={handleDeleteMovie}
       />
