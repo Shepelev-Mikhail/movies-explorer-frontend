@@ -15,6 +15,7 @@ function Movies() {
   const [showBtnMore, updateShowBtnMore] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     pagination = isDesktop ? 7 : 5;
 
     if (listMovies?.length) {
