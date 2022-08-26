@@ -28,10 +28,10 @@ function SavedMovies() {
 
   return (
     <>
-      <SearchForm
-        initList={listSavedMovies}
+      {!!listSavedMovies?.length && <SearchForm
+        defaultList={listSavedMovies}
         onUpdateListMovies={handleUpdateMovies}
-      />
+      />}
 
       <MoviesCardList
         type="saved-movies"

@@ -8,7 +8,7 @@ import Preloader from '../Preloader/Preloader';
 import * as MainApi from '../../utils/MainApi';
 import Info from '../Info/Info';
 
-function SearchForm({initList, onUpdateListMovies}) {
+function SearchForm({defaultList, onUpdateListMovies}) {
   const storageSettingMovies = localStorage.getItem('settingMovies');
   let initDataMovies = null;
 
@@ -16,47 +16,46 @@ function SearchForm({initList, onUpdateListMovies}) {
     initDataMovies = JSON.parse(storageSettingMovies);
   }
 
-  const [listMovies, updateListMovies] = useState(initList ? initList : null);
-  const [activeShortFilm, updateActiveShortFilm] = useState(initDataMovies?.shortFilm ? initDataMovies?.shortFilm : false);
-  const [searchParam, updateSearchParam] = useState(initDataMovies?.searchParam ? initDataMovies?.searchParam : '');
+  const [isLoadListMovies, setIsLoadListMovies] = useState(false);
+  const [listMovies, updateListMovies] = useState(defaultList ? defaultList : null);
+
+  const [activeShortFilm, updateActiveShortFilm] = useState(initDataMovies?.shortFilm && !defaultList ? initDataMovies?.shortFilm : false);
+  const [searchParam, updateSearchParam] = useState(initDataMovies?.searchParam && !defaultList ? initDataMovies?.searchParam : '');
   const [showPreloader, updateShowPreloader] = useState(false);
+
   const [showMessage, updateShowMessage] = useState(false);
   const [textMessage, updateTextMessage] = useState('');
   const [showError, updateShowError] = useState(false);
 
   useEffect(() => {
-    if (!initList && initDataMovies?.list?.length) {
-      getSaveMovies(initDataMovies?.list, true);
+    if (!defaultList && initDataMovies?.list?.length) {
+      getFilteredList(initDataMovies?.list, activeShortFilm);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getSaveMovies = (list, noUpdateList) => {
-    MainApi.getSaveMovies()
-      .then((data) => {
-        const listWithLikes = list.map(el => {
-          const isSavedMovie = data.find(movie => movie?.movieId === el?.id);
-          return {
-            ...el,
-            isOwner: isSavedMovie ? isSavedMovie?._id : null
-          };
-        })
-
-        if (!noUpdateList) {
-          updateListMovies(listWithLikes);
-        }
-        getFilteredList(listWithLikes, activeShortFilm);
-
-        updateShowPreloader(false);
-      })
+  const getMoviesWithLike = (listMovies, savedMovies) => {
+    return listMovies.map(el => {
+      const isSavedMovie = savedMovies.find(movie => movie?.movieId === el?.id);
+      return {
+        ...el,
+        isOwner: isSavedMovie ? isSavedMovie?._id : null
+      };
+    })
   }
 
-  const getDataList = () => {
+  const getDataList = (shortFilm) => {
     updateShowPreloader(true);
     MoviesApi.getMovies()
       .then((data) => {
+        updateListMovies(data);
+        setIsLoadListMovies(true);
+
         // После получения списка всех фильмов - получаем список сохранённых фильмов
-        getSaveMovies(data);
+        getFilteredList(data, shortFilm);
+
+        updateShowPreloader(false);
+
       })
       .catch(() => {
         updateShowPreloader(false);
@@ -65,10 +64,10 @@ function SearchForm({initList, onUpdateListMovies}) {
       })
   }
 
-  const saveSettingsPage = (list) => {
+  const saveSettingsPage = (list, shortFilm) => {
     const settingMovies = {
       searchParam: searchParam,
-      shortFilm: activeShortFilm,
+      shortFilm: shortFilm,
       list: list
     };
     localStorage.setItem('settingMovies', JSON.stringify(settingMovies));
@@ -77,24 +76,55 @@ function SearchForm({initList, onUpdateListMovies}) {
   const getFilteredList = (list, shortFilm) => {
     const strLower = searchParam?.toLowerCase();
 
-    const newList = list.filter(el =>
-      (el?.nameRU?.toLowerCase().indexOf(strLower) > -1
-        || el?.nameEN?.toLowerCase().indexOf(strLower) > -1)
-      && (!shortFilm || (shortFilm && el?.duration <= 40)));
+    if (defaultList) {
+      // Дальше фильтруем его
+      const newList = list.filter(el =>
+        (el?.nameRU?.toLowerCase().indexOf(strLower) > -1
+          || el?.nameEN?.toLowerCase().indexOf(strLower) > -1)
+        && (!shortFilm || (shortFilm && el?.duration <= 40)));
 
       if (newList.length === 0) {
         updateShowMessage(true)
         updateTextMessage('Ничего не найдено')
       }
 
-    saveSettingsPage(newList);
-    onUpdateListMovies(newList);
+      onUpdateListMovies(newList);
+    } else {
+      updateShowPreloader(true);
+      // Получаем список сохранённых фильмов
+      MainApi.getSaveMovies()
+        .then((data) => {
+          // Получаем список фильмов с учётом лайков
+          const listWithLikes = getMoviesWithLike(list, data);
+
+          // Дальше фильтруем его
+          const newList = listWithLikes.filter(el =>
+            (el?.nameRU?.toLowerCase().indexOf(strLower) > -1
+              || el?.nameEN?.toLowerCase().indexOf(strLower) > -1)
+            && (!shortFilm || (shortFilm && el?.duration <= 40)));
+
+          if (newList.length === 0) {
+            updateShowMessage(true)
+            updateTextMessage('Ничего не найдено')
+          }
+
+          saveSettingsPage(newList, shortFilm);
+          onUpdateListMovies(newList);
+
+          updateShowPreloader(false);
+        })
+        .catch(() => {
+          updateShowPreloader(false);
+          updateShowMessage(true)
+          updateTextMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
+        })
+    }
   }
 
   const handleChangeSwitch = (data) => {
-    if (!initList && !listMovies && initDataMovies?.searchParam) {
+    if (!defaultList && !isLoadListMovies && !!initDataMovies?.searchParam) {
       getDataList(data?.value);
-    } else if (listMovies?.length && searchParam) {
+    } else if (listMovies?.length && (searchParam || defaultList)) {
       getFilteredList(listMovies, data?.value);
     }
 
@@ -104,7 +134,7 @@ function SearchForm({initList, onUpdateListMovies}) {
   const handleChangeSearch = (evt) => {
     updateSearchParam(evt?.target?.value);
 
-    if (evt?.target?.value === '') {
+    if (!defaultList && evt?.target?.value === '') {
       onUpdateListMovies([]);
     }
   }
@@ -113,13 +143,15 @@ function SearchForm({initList, onUpdateListMovies}) {
     evt.preventDefault();
     updateShowError(false)
 
-    if (!searchParam) {
+    if (!defaultList && !searchParam) {
       updateShowError(true)
       return
     }
 
-    if (!listMovies && !initList) {
-      getDataList();
+    // При отправке формы поиска мы получаем список фильмов
+    // или если список есть, фильтруем текущий
+    if (!defaultList && !isLoadListMovies) {
+      getDataList(activeShortFilm);
     } else {
       getFilteredList(listMovies, activeShortFilm);
     }
@@ -149,8 +181,8 @@ function SearchForm({initList, onUpdateListMovies}) {
       </div>
 
       {showPreloader && <Preloader />}
-      {showMessage && 
-      <Info 
+      {showMessage &&
+      <Info
         text={textMessage}
         updateShowMessage={updateShowMessage}
       />}
