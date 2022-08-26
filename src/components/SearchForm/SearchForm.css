@@ -8,6 +8,7 @@
 }
 
 .search-form__content {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,6 +79,17 @@
 
 .search-form__button-image:hover {
   opacity: .6;
+}
+
+.search-form__error {
+  position: absolute;
+  left: 63px;
+  top: 80px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
 }
 
 @media (min-width: 768px) {

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import * as MainApi from '../../utils/MainApi.js';
-import * as MoviesApi from '../../utils/MoviesApi.js';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -21,6 +20,7 @@ function App() {
   const [errorSubmit, updateErrorSubmit] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [isEdit, updateIsEdit] = useState(false);
+  const [showMessage, updateShowMessage] = useState(false);
 
   let location = useLocation()
 
@@ -87,6 +87,7 @@ function App() {
         updateCurrentUser(res)
         updateErrorSubmit('')
         updateIsEdit(false)
+        updateShowMessage(true)
       })
       .catch((err) => {
         if (err === 409) {
@@ -109,7 +110,6 @@ function App() {
     let token = localStorage.getItem('token');
     if (token) {
       setLoggedIn(true);
-      // history.push('/');
     }
   };
 
@@ -144,7 +144,15 @@ function App() {
 
         <ProtectedRoute exact path="/profile" loggedIn={loggedIn}>
           <Header loggedIn={loggedIn} />
-          <Profile signOut={signOut} handleUpdateProfile={handleUpdateProfile} errorSubmit={errorSubmit} isEdit={isEdit} updateIsEdit={updateIsEdit}/>
+          <Profile 
+            signOut={signOut} 
+            handleUpdateProfile={handleUpdateProfile} 
+            errorSubmit={errorSubmit} 
+            isEdit={isEdit} 
+            updateIsEdit={updateIsEdit}
+            showMessage={showMessage}
+            updateShowMessage={updateShowMessage}
+          />
         </ProtectedRoute>
 
         <Route exact path="/signin">
@@ -162,7 +170,6 @@ function App() {
       </Switch>
       </div>
     </CurrentUserContext.Provider>
-
   );
 }
 

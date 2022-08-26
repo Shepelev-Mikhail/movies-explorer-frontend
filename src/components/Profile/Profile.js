@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import {useForm} from 'react-hook-form';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useEffect } from 'react';
+import Info from '../Info/Info';
 
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
@@ -11,7 +12,6 @@ function Profile(props) {
   const onSubmit = (data) => {
     const { name, email } = data;
 
-    
     props.handleUpdateProfile({name, email});
     currentUser.name = name;
     currentUser.email = email;
@@ -36,10 +36,9 @@ function Profile(props) {
 
   useEffect(() => {
     watch((value) => {
-      // console.log('value', value?.name, value?.email)
-      // console.log('currentUser', currentUser.name, currentUser.email)
       updateIsActiveSubmit(value?.name !== currentUser.name || value?.email !== currentUser.email)
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch])
 
   return (
@@ -67,10 +66,9 @@ function Profile(props) {
                   message: "Максимум 40 символов"
                 },
                 pattern: {
-                  value: /^[a-zа-яё\s-]+$/,
+                  value: /^[а-яА-ЯёЁa-zA-Z\s-]+$/,
                   message: "Используйте латиницу, кириллицу, пробел или дефис"
-                },
-                //validate: value => value !== currentUser.name
+                }
               })}
             />
             <div className="profile__field-error">
@@ -102,8 +100,7 @@ function Profile(props) {
                 pattern: {
                   value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                   message: "Введен некорректный Email"
-                },
-                // validate: value => value !== currentUser.email
+                }
               })}
             />
             <div className="profile__field-error">
@@ -117,7 +114,7 @@ function Profile(props) {
 
         {props.isEdit &&
           <div className="profile__buttons">
-            {props.errorSubmit && <span className="profile__submit-error">{props.errorSubmit}</span>}
+            {props.errorSubmit && <span className="profile__submit-text">{props.errorSubmit}</span>}
             <button
               type="submit"
               className="profile__submit"
@@ -146,6 +143,8 @@ function Profile(props) {
           </button>
         </div>
       }
+
+      {props.showMessage && <Info text="Обновление данных прошло успешно" updateShowMessage={props.updateShowMessage}/>}
     </div>
   )
 }

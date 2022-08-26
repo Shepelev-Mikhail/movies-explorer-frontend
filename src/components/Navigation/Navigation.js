@@ -24,13 +24,7 @@ const menu = [
 function Navigation(props) {
   let location = useLocation();
 
-  // const [loggedIn, setLoggedIn] = useState(false);
   const [isOpenMenu, updateOpenMenu] = useState(false);
-
-  // Переключатель зарегистрированный и незарегистрированный пользователь
-  // useEffect(() => {
-  //   setLoggedIn(true);
-  // }, [])
 
   const handleOpenMobileMenu = () => updateOpenMenu(!isOpenMenu);
   const handleCloseMobileMenu = () => updateOpenMenu(false);
@@ -39,6 +33,7 @@ function Navigation(props) {
     updateOpenMenu(false);
   }, [location])
 
+  // eslint-disable-next-line no-unused-vars
   const menuJsx = menu?.map(el => {
     return (
       <NavLink

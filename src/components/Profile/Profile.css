@@ -138,7 +138,7 @@
   background-color: #C4C4C4;
 }
 
-.profile__submit-error {
+.profile__submit-text {
   width: max-content;
   position: absolute;
   top: -22px;

@@ -9,12 +9,10 @@ function WelcomePage({ title, btnSubmitName, footerText, footerLinkText, footerL
     if (showName) {
       let {name, email, password} = data
       handler({name, email, password});
-      // reset();
     }
     if (!showName) {
       let {email, password} = data
       handler({email, password});
-      // reset();
     }
   };
 
@@ -25,7 +23,6 @@ function WelcomePage({ title, btnSubmitName, footerText, footerLinkText, footerL
       isValid,
     },
     handleSubmit,
-    reset,
   } = useForm({
     mode: "onChange"
   });

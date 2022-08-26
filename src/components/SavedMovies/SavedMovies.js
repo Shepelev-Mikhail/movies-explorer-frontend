@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import movie from '../../images/movie.svg';
 import Preloader from '../Preloader/Preloader';
 import * as MainApi from '../../utils/MainApi.js';
 

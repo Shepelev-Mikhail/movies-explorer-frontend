@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 import icon from '../../images/icon.svg';
 import search from '../../images/search.svg';
 import Switch from '../Switch/Switch';
 import * as MoviesApi from '../../utils/MoviesApi.js';
 import Preloader from '../Preloader/Preloader';
-import * as MainApi from "../../utils/MainApi";
+import * as MainApi from '../../utils/MainApi';
+import Info from '../Info/Info';
 
 function SearchForm({initList, onUpdateListMovies}) {
   const storageSettingMovies = localStorage.getItem('settingMovies');
@@ -19,11 +20,15 @@ function SearchForm({initList, onUpdateListMovies}) {
   const [activeShortFilm, updateActiveShortFilm] = useState(initDataMovies?.shortFilm ? initDataMovies?.shortFilm : false);
   const [searchParam, updateSearchParam] = useState(initDataMovies?.searchParam ? initDataMovies?.searchParam : '');
   const [showPreloader, updateShowPreloader] = useState(false);
+  const [showMessage, updateShowMessage] = useState(false);
+  const [textMessage, updateTextMessage] = useState('');
+  const [showError, updateShowError] = useState(false);
 
   useEffect(() => {
     if (!initList && initDataMovies?.list?.length) {
       getSaveMovies(initDataMovies?.list, true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getSaveMovies = (list, noUpdateList) => {
@@ -53,6 +58,11 @@ function SearchForm({initList, onUpdateListMovies}) {
         // После получения списка всех фильмов - получаем список сохранённых фильмов
         getSaveMovies(data);
       })
+      .catch(() => {
+        updateShowPreloader(false);
+        updateShowMessage(true)
+        updateTextMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
+      })
   }
 
   const saveSettingsPage = (list) => {
@@ -71,6 +81,11 @@ function SearchForm({initList, onUpdateListMovies}) {
       (el?.nameRU?.toLowerCase().indexOf(strLower) > -1
         || el?.nameEN?.toLowerCase().indexOf(strLower) > -1)
       && (!shortFilm || (shortFilm && el?.duration <= 40)));
+
+      if (newList.length === 0) {
+        updateShowMessage(true)
+        updateTextMessage('Ничего не найдено')
+      }
 
     saveSettingsPage(newList);
     onUpdateListMovies(newList);
@@ -96,9 +111,10 @@ function SearchForm({initList, onUpdateListMovies}) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    updateShowError(false)
 
     if (!searchParam) {
-      console.log('Нужно ввести ключевое слово')
+      updateShowError(true)
       return
     }
 
@@ -125,12 +141,19 @@ function SearchForm({initList, onUpdateListMovies}) {
             <button type="submit" className="search-form__button" onClick={handleSubmit}>
               <img className="search-form__button-image" src={search} alt="поиск" />
             </button>
+
           </form>
           <Switch isActive={activeShortFilm} onChange={handleChangeSwitch} />
+          {showError && <span className="search-form__error">Нужно ввести ключевое слово</span>}
         </div>
       </div>
 
       {showPreloader && <Preloader />}
+      {showMessage && 
+      <Info 
+        text={textMessage}
+        updateShowMessage={updateShowMessage}
+      />}
     </section>
   )
 }
