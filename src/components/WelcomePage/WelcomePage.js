@@ -1,31 +1,31 @@
-import React, {useState} from "react";
-import {Link, NavLink} from "react-router-dom";
+import React from 'react';
+import {Link, NavLink} from 'react-router-dom';
+import {useForm} from 'react-hook-form';
 import logo from '../../images/logo.svg';
 import './WelcomePage.css';
 
-function WelcomePage({ title, btnSubmitName, footerText, footerLinkText, footerLinkHref, showName = false }) {
-  let initForm = {
-    email: '',
-    password: ''
-  };
-  if (showName) initForm.name = '';
-  const [formParams, setFormParams] = useState(initForm);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormParams((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-
-    if (!formParams.email || !formParams.password || (showName && !formParams.name)) {
-      return;
+function WelcomePage({ title, btnSubmitName, footerText, footerLinkText, footerLinkHref, showName = false, handler, errorSubmit}) {
+  const onSubmit = (data) => {
+    if (showName) {
+      let {name, email, password} = data
+      handler({name, email, password});
     }
-  }
+    if (!showName) {
+      let {email, password} = data
+      handler({email, password});
+    }
+  };
+
+  const {
+    register,
+    formState: {
+      errors,
+      isValid,
+    },
+    handleSubmit,
+  } = useForm({
+    mode: "onChange"
+  });
 
   return (
     <div className="welcome-page">
@@ -33,64 +33,103 @@ function WelcomePage({ title, btnSubmitName, footerText, footerLinkText, footerL
         <img className="logo-img" src={logo} alt="логотип"/>
       </NavLink>
       <h2 className="welcome-page__title">{title}</h2>
-      <form method="post" name="welcome-page__form" className="welcome-page__form" onSubmit={handleSubmit}>
+      <form method="post" name="welcome-page__form" className="welcome-page__form" onSubmit={handleSubmit(onSubmit)}>
         <div className="welcome-page__fields">
           {showName && (
             <div className="welcome-page__field">
               <label className="welcome-page__input-text">Имя</label>
               <input
-                id="name-input"
                 className="welcome-page__input welcome-page__input_type_name"
                 type="text"
-                name="name"
-                minLength="2"
-                maxLength="40"
                 placeholder="Имя"
                 autoComplete="off"
-                required
-                onChange={handleChange}
+                {...register("name", {
+                  required: "Поле обязательно к заполнению",
+                  minLength: {
+                    value: 5,
+                    message: "Минимум 5 символов"
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "Максимум 40 символов"
+                  },
+                  pattern: {
+                    value: /^[а-яА-ЯёЁa-zA-Z\s-]+$/,
+                    message: "Используйте латиницу, кириллицу, пробел или дефис"
+                  }
+                })}
               />
-              <span className="email-input-error welcome-page__error"/>
+              <div className="welcome-page__error">
+                {errors?.name &&
+                <span className="name-input-error welcome-page__error-text">
+                  {errors?.name?.message || "Error"}
+                </span>}
+              </div>
             </div>
           )}
 
           <div className="welcome-page__field">
             <label className="welcome-page__input-text">E-mail</label>
             <input
-              id="email-input"
               className="welcome-page__input welcome-page__input_type_email"
               type="email"
-              name="email"
-              minLength="2"
-              maxLength="40"
               placeholder="Email"
               autoComplete="off"
-              required
-              onChange={handleChange}
+              {...register("email", {
+                required: "Поле обязательно к заполнению",
+                minLength: {
+                  value: 2,
+                  message: "Минимум 2 символов"
+                },
+                maxLength: {
+                  value: 40,
+                  message: "Максимум 40 символов"
+                },
+                pattern: {
+                  value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                  message: "Введен некорректный Email"
+                }
+              })}
             />
-            <span className="email-input-error welcome-page__error" />
+            <div className="welcome-page__error">
+              {errors?.email &&
+              <span className="email-input-error welcome-page__error-text">
+                {errors?.email?.message || "Error"}
+              </span>}
+            </div>
           </div>
 
           <div className="welcome-page__field">
             <label className="welcome-page__input-text">Пароль</label>
             <input
-              id="password-input"
               className="welcome-page__input welcome-page__input_type_password"
               type="password"
-              name="password"
-              minLength="2"
-              maxLength="40"
               placeholder="Password"
               autoComplete="off"
-              required
-              onChange={handleChange}
+              {...register("password", {
+                required: "Поле обязательно к заполнению",
+                minLength: {
+                  value: 2,
+                  message: "Минимум 2 символов"
+                },
+                maxLength: {
+                  value: 40,
+                  message: "Максимум 40 символов"
+                },
+              })}
             />
-            <span className="password-input-error welcome-page__error" />
+            <div className="welcome-page__error">
+              {errors?.password &&
+              <span className="password-input-error welcome-page__error-text">
+                {errors?.password?.message || "Error"}
+              </span>}
+            </div>
           </div>
         </div>
 
         <div className="welcome-page__buttons">
-          <button className="welcome-page__submit" type="submit">{btnSubmitName}</button>
+          {errorSubmit && <span className="welcome-page__submit-error">{errorSubmit}</span>}
+          <button className="welcome-page__submit" type="submit" disabled={!isValid}>{btnSubmitName}</button>
 
           <div className="welcome-page__footer">
             {footerText}

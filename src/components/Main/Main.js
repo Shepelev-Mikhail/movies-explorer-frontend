@@ -34,7 +34,7 @@ function Main() {
   };
 
   return (
-    <div className="main">
+    <div className="main__page">
       <Promo />
       <NavTab data={dataNav} onClick={buttonHandler} />
       <AboutProject componentRef={ref1} />

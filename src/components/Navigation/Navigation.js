@@ -21,16 +21,10 @@ const menu = [
   }
 ]
 
-function Navigation() {
+function Navigation(props) {
   let location = useLocation();
 
-  const [loggedIn, setLoggedIn] = useState(false);
   const [isOpenMenu, updateOpenMenu] = useState(false);
-
-  // Переключатель зарегистрированный и незарегистрированный пользователь
-  useEffect(() => {
-    setLoggedIn(true);
-  }, [])
 
   const handleOpenMobileMenu = () => updateOpenMenu(!isOpenMenu);
   const handleCloseMobileMenu = () => updateOpenMenu(false);
@@ -39,6 +33,7 @@ function Navigation() {
     updateOpenMenu(false);
   }, [location])
 
+  // eslint-disable-next-line no-unused-vars
   const menuJsx = menu?.map(el => {
     return (
       <NavLink
@@ -54,7 +49,7 @@ function Navigation() {
 
   return (
     <div className="navigation">
-      {loggedIn ? (
+      {props.loggedIn ? (
         <>
           <Menu isOpenMenu={isOpenMenu} onCloseMenu={handleCloseMobileMenu} className={location.pathname === '/' ? 'menu_light' : ''} />
 
@@ -66,8 +61,8 @@ function Navigation() {
         </>
       ) : (
         <div className="navigation__buttons">
-          <NavLink to="/sign-up" className="navigation__signup">Регистрация</NavLink>
-          <NavLink to="/sign-in" className="navigation__signin">Войти</NavLink>
+          <NavLink to="/signup" className="navigation__signup">Регистрация</NavLink>
+          <NavLink to="/signin" className="navigation__signin">Войти</NavLink>
         </div>
       )}
     </div>

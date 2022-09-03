@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './Switch.css';
 
-function Switch({onChange}) {
-  const [checked, setValue] = useState(true);
+function Switch({isActive, onChange}) {
+  const [checked, setValue] = useState(!!isActive);
 
   const handlerSwitch = () => {
     const value = !checked;
